@@ -27,6 +27,7 @@ Larissa Allen
 ### 294 Students
 
 Matt Landry
+Daniel Calomino
 
 ## Prerequisites
 
