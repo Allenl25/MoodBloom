@@ -22,7 +22,7 @@ Larissa Allen
 
 ### 394 Students
 
-394 Student(s) here
+Josh Graham
 
 ### 294 Students
 
