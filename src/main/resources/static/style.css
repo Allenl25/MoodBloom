@@ -64,8 +64,8 @@ body{
 
 
 
-main.hero img.logo {
-    width: 80px;
+.logo {
+    width: 500px;
     height: auto;
     margin-bottom: 20px;
 }
