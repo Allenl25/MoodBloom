@@ -1,0 +1,67 @@
+.journal-container {
+    min-height: 100vh;
+    padding: 40px 20px;
+}
+
+.journal-container h1 {
+    text-align: center;
+    color: #7bafd4;
+    font-size: 3rem;
+    margin-bottom: 30px;
+}
+
+.journal-card {
+    background: white;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.journal-card label {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.journal-card input,
+.journal-card textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d8e2ea;
+    border-radius: 10px;
+    font-size: 1rem;
+    color: #2c3e50;
+    background: #fafcfd;
+}
+
+.journal-card input:focus,
+.journal-card textarea:focus {
+    outline: none;
+    border-color: #7bafd4;
+    box-shadow: 0 0 5px rgba(123, 175, 212, 0.4);
+}
+
+.journal-card textarea {
+    resize: vertical;
+    min-height: 250px;
+}
+
+.save-btn {
+    margin-top: 25px;
+    background: #7bafd4;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.save-btn:hover {
+    background: #689fc8;
+}
