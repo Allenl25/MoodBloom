@@ -61,3 +61,11 @@ body{
     color:#7bafd4;
     border:2px solid #7bafd4;
 }
+
+
+
+.logo {
+    width: 500px;
+    height: auto;
+    margin-bottom: 20px;
+}
