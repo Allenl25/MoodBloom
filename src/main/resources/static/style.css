@@ -69,3 +69,58 @@ body{
     height: auto;
     margin-bottom: 20px;
 }
+
+/* Login page styles */
+
+.login-page {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form{
+    width: 300px;
+
+}
+
+.login-form label{
+
+    display:block;
+
+    margin-top: 10px;
+
+}
+
+.login-form input{
+
+    width: 100%;
+    padding: 8px;
+}
+
+.login-form h1{
+    text-align: center;
+}
+
+.login-logo{
+   
+     width: 350px;
+    height: auto;
+    margin-bottom: 30px;
+} 
+
+.login-form button{
+    display: block;
+    margin: 20px auto 0 auto;
+    padding: 12px 24px;
+    background: #6f8f84;
+    color: white;
+    border: 2px solid #6f8f84;
+}
+
+
+
+.login-link{
+    text-align: center;
+    margin-top: 10px
+}
