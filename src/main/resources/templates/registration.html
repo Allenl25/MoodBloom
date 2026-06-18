@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Account</title>
+
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+    <main class="registration-page">
+
+        <!-- registration form -->
+       <form class="registration-form" action="/register" method="post">
+
+        <!-- Logo -->
+
+        <img src="/images/MoodBloomLogo.png" alt="MoodBloom logo" class="registration-logo">
+
+        <h1>Register Account</h1>
+
+
+
+        <!-- Textboxes Username,Email,Password, Confirm Password, Guidelines/Privacy Policies -->
+    <div class="form-row">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username">
+    </div>
+
+
+
+    <div class="form-row">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">
+    </div>
+
+
+
+    <div class="form-row">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password">
+    </div>
+
+
+
+    <div class="form-row">
+        <label for="confirmPassword">Confirm Password:</label>
+        <input type="password" id="confirmPassword" name="confirmPassword">
+    </div>
+
+
+
+    <div class="checkbox-row">
+    <!-- community guidelines checkbox -->
+    
+        <input type="checkbox" id= "guidelines" name="guidelines">
+        <div class="policy-link">
+             <a href="/policy">Website Guidelines</a></p>
+        </div> 
+
+    
+
+
+    <!-- privacy policy checkbox -->
+
+    
+    
+        <input type="checkbox" id="privacy" name="privacy">
+        
+        <div class="policy-link">
+             <a href="/policy">Privacy Policy</a></p>
+        </div>
+       
+    
+
+
+    </div>
+
+       
+    <!-- submit registration info button -->
+
+    <button type="submit" class="primary-btn">Complete Registration</button>
+
+     
+
+</form>
+       
+        
+
+       
+      
+
+    </main>
+
+</body>
+</html>
