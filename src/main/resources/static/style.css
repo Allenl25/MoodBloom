@@ -198,3 +198,68 @@ body{
     
 }
 
+
+/* Mood tracker styles */
+
+
+.mood-options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.mood-btn {
+    width: 110px;
+    height: 110px;
+    background: white;
+    border-radius: 20px;
+    font-size: 1.3rem;
+    padding: 10px;
+    cursor: pointer;
+    color: #6f8f84;
+    border: 2px solid #84a79d;
+    transition: 0.25s;
+}
+
+.mood-btn:hover {
+    transform: scale(1.07);
+    background: #f7fafc;
+}
+
+.mood-notes {
+    border-radius: 12px;
+    border: 1px solid #84a79d;
+    padding: 10px;
+    color: #6f8f84;
+}
+
+.mood-entry {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #f6a3b4;
+}
+
+.mood-icon {
+    font-size: 1.6rem;
+}
+
+.mood-title {
+    color: #f6a3b4;
+    margin-bottom: 20px;
+}
+
+.mood-subtitle,
+.mood-label,
+.recent-title,
+.mood-date,
+.mood-note {
+    color: #6f8f84;
+}
+
+.mood-save-btn {
+    background: #84a79d !important;
+    border: none !important;
+}
