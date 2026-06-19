@@ -19,8 +19,13 @@ public class HomeController {
     }
 
     @GetMapping("/register")
-        public String register(){
-            return "registration";
-        }
+    public String register(){
+        return "registration";
     }
+
+    @GetMapping("/mood_tracker")
+    public String moodTracker() {
+        return "mood_tracker";
+    }
+}
 
