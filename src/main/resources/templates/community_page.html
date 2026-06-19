@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Community Page</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <header class="navbar">
+            <div class="navbar__brand">
+                <span><img src="../static/images/MoodBloomLogo.png" alt="MoodBloom Logo" /></span>
+                <div>
+                    MoodBloom
+                    <div style="font-size:0.8rem; font-weight:400; opacity:0.85;">Grow your mood</div>
+                </div>
+            </div>
+
+            <nav>
+                <ul class="navbar__links">
+                    <li><a href="#Home">Home</a></li>
+                    <li><a href="#Journal">Journal</a></li>
+                    <li><a href="#Mood Tracking">Mood Tracking</a></li>
+                    <li><a href="#Community">Community</a></li>
+                </ul>
+            </nav>
+
+            <button class="navbar__cta">Login</button>
+        </header>
+
+        <main class="community-page">
+            <div class="community-page__container">
+                <section class="community-panel">
+                    <article class="community-card faq-card">
+                        <div class="card-header">
+                            <span class="card-label">Common Questions</span>
+                            <h1>Frequently Asked Questions</h1>
+                        </div>
+                        <div class="faq-item">
+                            <strong>Question 1?</strong>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                        <div class="faq-item">
+                            <strong>Question 2?</strong>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                        <div class="faq-item">
+                            <strong>Question 3?</strong>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </article>
+
+                    <article class="community-card ask-card">
+                        <div class="card-header">
+                            <span class="card-label">Ask a Question</span>
+                            <h2>Post your question</h2>
+                        </div>
+                        <form class="ask-form">
+                            <label for="question-input">Your question</label>
+                            <textarea id="question-input" name="question" placeholder="Type your question here..."></textarea>
+                            <button type="submit">Post Question</button>
+                        </form>
+                    </article>
+                </section>
+
+                <aside class="community-side">
+                    <div class="community-side__box">
+                        <h2>Welcome to MoodBloom</h2>
+                        <p>Share what’s on your mind, ask for help, and discover answers from other members of the community.</p>
+                    </div>
+                </aside>
+            </div>
+        </main>
+    </body>
+
+    <footer>
+        
+    </footer>
+</html>
