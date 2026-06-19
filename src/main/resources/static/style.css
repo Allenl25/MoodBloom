@@ -22,7 +22,7 @@ body{
 
 .hero h1{
     font-size:4rem;
-    color:#7bafd4;
+    color:#f6a3b4;
     margin-bottom:10px;
 }
 
@@ -52,12 +52,149 @@ body{
 }
 
 .primary-btn{
-    background:#7bafd4;
+    background:#f6a3b4;
     color:white;
 }
 
 .secondary-btn{
     background:white;
-    color:#7bafd4;
-    border:2px solid #7bafd4;
+    color:#84a79d;
+    border:2px solid #84a79d;
 }
+
+.logo {
+    width: 500px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+/* Login page styles */
+
+.login-page {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form{
+    width: 350px;
+
+}
+
+.login-form label{
+
+    display:block;
+
+    margin-top: 10px;
+
+}
+
+.login-form input{
+
+    width: 100%;
+    padding: 8px;
+}
+
+.login-form h1{
+    text-align: center;
+    color:#6f8f84
+}
+
+.login-logo{
+   
+     width: 350px;
+    height: auto;
+    margin-bottom: 30px;
+} 
+
+.login-form button{
+    display: block;
+    margin: 20px auto 0 auto;
+    padding: 12px 24px;
+    background: #6f8f84;
+    color: white;
+    border: 2px solid #6f8f84;
+}
+
+
+
+.login-link{
+    text-align: center;
+    margin-top: 10px
+}
+
+
+/* registration styles */
+
+
+.registration-page {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.registration-form{
+    width: 350px;
+
+}
+
+.registration-form h1{
+    color:#6f8f84;
+
+}
+
+.registration-form label{
+
+    display:block;
+
+    margin-top: 10px;
+
+}
+
+.registration-form input{
+
+    width: 100%;
+    padding: 8px;
+}
+
+.registration-form h1{
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.registration-logo{
+   
+    display: block;
+     width: 350px;
+    height: auto;
+    margin: 0 auto 30px auto;
+} 
+
+.registration-form button{
+    display: block;
+    margin: 40px auto 0 auto;
+    padding: 12px 24px;
+    background: #6f8f84;
+    color: white;
+    border: 2px solid #6f8f84;
+
+}
+
+.registration-page .checkbox-row{
+
+    display:flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 24px;
+
+}
+
+.registration-page.checkbox-row input{
+
+    width: auto;
+    padding: 0;
+    
+}
+
