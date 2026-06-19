@@ -71,10 +71,11 @@ body{
 /* Login page styles */
 
 .login-page {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    padding-top: 10px;
 }
 
 .login-form{
@@ -103,9 +104,10 @@ body{
 
 .login-logo{
    
-     width: 350px;
+     width: 300px;
     height: auto;
-    margin-bottom: 30px;
+    display: block;
+    margin: 0 auto 5px auto;
 } 
 
 .login-form button{
