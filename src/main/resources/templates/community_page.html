@@ -4,12 +4,12 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Community Page</title>
-        <link rel="stylesheet" href="../static/style.css" />
+        <link rel="stylesheet" href="style.css" />
     </head>
     <body>
         <header class="navbar">
             <div class="navbar__brand">
-                <span><img src="../static/images/MoodBloomLogo.png" alt="MoodBloom Logo" /></span>
+                <span><img src="../images/MoodBloomLogo_cropped.png" alt="MoodBloom Logo" /></span>
                 <div>
                     MoodBloom
                     <div style="font-size:0.8rem; font-weight:400; opacity:0.85;">Grow your mood</div>
@@ -18,14 +18,14 @@
 
             <nav>
                 <ul class="navbar__links">
-                    <li><a href="#Home">Home</a></li>
-                    <li><a href="#Journal">Journal</a></li>
-                    <li><a href="#Mood Tracking">Mood Tracking</a></li>
-                    <li><a href="#Community">Community</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/journal">Journal</a></li>
+                    <li><a href="/mood_tracker">Mood Tracking</a></li>
+                    <li><a href="/community">Community</a></li>
                 </ul>
             </nav>
 
-            <button class="navbar__cta">Login</button>
+            <a href="/login" class="navbar__cta">Login</a>
         </header>
 
         <main class="community-page">
