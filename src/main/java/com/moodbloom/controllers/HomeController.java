@@ -11,8 +11,6 @@ public class HomeController {
         return "index";
     }
 
-
-
     @GetMapping("/login")
     public String login() {
         return "login";
@@ -26,6 +24,11 @@ public class HomeController {
     @GetMapping("/mood_tracker")
     public String moodTracker() {
         return "mood_tracker";
+    }
+
+    @GetMapping("/community")
+    public String community() {
+    return "community_page";
     }
 }
 
