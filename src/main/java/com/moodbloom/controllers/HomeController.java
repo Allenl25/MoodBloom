@@ -3,6 +3,11 @@ package com.moodbloom.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+//logout functionality
+import org.springframework.web.bind.annotation.PostMapping;
+import jakarta.servlet.http.HttpSession;
+
+
 @Controller
 public class HomeController {
 
@@ -29,6 +34,16 @@ public class HomeController {
     @GetMapping("/community")
     public String community() {
     return "community_page";
+    }
+
+    @PostMapping("/logout")
+    public String logout(HttpSession session){
+        //destroys usr current login session
+        session.invalidate();
+
+        //send user back to login page after loging out
+
+        return"redirect:/login";
     }
 }
 
