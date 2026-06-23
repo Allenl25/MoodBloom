@@ -30,5 +30,17 @@ public class HomeController {
     public String community() {
     return "community_page";
     }
+
+
+   @GetMapping("/policy")
+    public String policy() {
+    return "policy";
+    }
+
+    @GetMapping("/guidelines")
+public String guidelines() {
+    return "guidelines";
 }
+}
+ 
 
