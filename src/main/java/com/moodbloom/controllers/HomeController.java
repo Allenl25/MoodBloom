@@ -2,10 +2,12 @@ package com.moodbloom.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-
+//add error report to user for incorrect information
+import org.springframework.ui.Model;
 //logout functionality
 import org.springframework.web.bind.annotation.PostMapping;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
@@ -35,7 +37,7 @@ public class HomeController {
     public String community() {
     return "community_page";
     }
-
+        //logout user
     @PostMapping("/logout")
     public String logout(HttpSession session){
         //destroys usr current login session
@@ -45,5 +47,87 @@ public class HomeController {
 
         return"redirect:/login";
     }
+    
+    
+    
+      @PostMapping("/register")
+public String processRegister(
+        @RequestParam String username,
+        @RequestParam String email,
+        @RequestParam String password,
+        @RequestParam String confirmPassword,
+        @RequestParam(required = false) String guidelines,
+        @RequestParam(required = false) String privacy,
+        Model model) {
+
+    System.out.println("New registration attempt:");
+    System.out.println("Username: " + username);
+    System.out.println("Email: " + email);
+
+    // These keep the user's progress if there is an error.
+    // We do NOT send password back for safety.
+    model.addAttribute("username", username);
+    model.addAttribute("email", email);
+
+    // Check if username is blank
+    if (username == null || username.isBlank()) {
+        model.addAttribute("error", "Username is left blank");
+        return "registration";
+    }
+
+    // Check username length
+    // Change 12 to whatever minimum you want.
+    if (username.length() < 12) {
+        model.addAttribute("error", "Username must be at least 12 characters.");
+        return "registration";
+    }
+
+    // Check if email is blank
+    if (email == null || email.isBlank()) {
+        model.addAttribute("error", "Email is left blank");
+        return "registration";
+    }
+
+    // Check if password is blank
+    if (password == null || password.isBlank()) {
+        model.addAttribute("error", "Password is left blank");
+        return "registration";
+    }
+
+    // Check password length
+    if (password.length() < 8) {
+        model.addAttribute("error", "Password must be at least 8 characters.");
+        return "registration";
+    }
+
+    // Check if confirm password is blank
+    if (confirmPassword == null || confirmPassword.isBlank()) {
+        model.addAttribute("error", "Confirm password is left blank");
+        return "registration";
+    }
+
+    // Check if passwords match
+    if (!password.equals(confirmPassword)) {
+        model.addAttribute("error", "Passwords do not match.");
+        return "registration";
+    }
+
+    // Check guidelines checkbox
+    if (guidelines == null) {
+        model.addAttribute("error", "You must accept the guidelines.");
+        return "registration";
+    }
+
+    // Check privacy checkbox
+    if (privacy == null) {
+        model.addAttribute("error", "You must accept the privacy policy.");
+        return "registration";
+    }
+
+    // If the code reaches here, everything passed.
+    System.out.println("Registration successful for: " + username);
+
+    return "redirect:/login";
 }
 
+}
