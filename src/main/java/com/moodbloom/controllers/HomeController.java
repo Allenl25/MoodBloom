@@ -37,6 +37,7 @@ public class HomeController {
     public String community() {
     return "community_page";
     }
+
         //logout user
     @PostMapping("/logout")
     public String logout(HttpSession session){
@@ -131,6 +132,20 @@ public String processRegister(
     System.out.println("Registration successful for: " + username);
 
     return "redirect:/login";
+
+
+
+   @GetMapping("/policy")
+    public String policy() {
+    return "policy";
+    }
+
+    @GetMapping("/guidelines")
+public String guidelines() {
+    return "guidelines";
 }
+
+}
+ 
 
 }

@@ -1,0 +1,59 @@
+/* Privacy Policy Page */
+
+
+.policy-body {
+    background-color: white;
+   
+    margin: 0;
+    padding: 0;
+}
+
+/* This styles the main white box/card */
+.policy-page {
+    background-color: white;
+    width: 80%;
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 35px;
+   
+}
+
+/* This styles the MoodBloom logo on the policy page */
+.policy-page .registration-logo {
+    display: block;
+    width: 140px;
+    margin: 0 auto 20px auto;
+}
+
+/* This styles the main title */
+.policy-page h1 {
+    text-align: center;
+    color: #4f7f52;
+    margin-bottom: 25px;
+}
+
+/* This styles the smaller section titles */
+.policy-page h2 {
+    color: #c46a91;
+    margin-top: 25px;
+    margin-bottom: 8px;
+}
+
+/* This styles the paragraph text */
+.policy-page p {
+    color: #333;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+
+.policy-page a {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 12px 18px;
+    background-color: #6f8f84;;
+    color: white;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
