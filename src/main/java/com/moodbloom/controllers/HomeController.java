@@ -63,11 +63,14 @@ public String processRegister(
     System.out.println("New registration attempt:");
     System.out.println("Username: " + username);
     System.out.println("Email: " + email);
-
+    System.out.println("Password: " + password);
+    System.out.println("confirm Password: " + confirmPassword);
     // These keep the user's progress if there is an error.
-    // We do NOT send password back for safety.
+    
     model.addAttribute("username", username);
     model.addAttribute("email", email);
+    model.addAttribute("password", password);
+    model.addAttribute("confirmPassword", confirmPassword);
 
     // Check if username is blank
     if (username == null || username.isBlank()) {
@@ -76,9 +79,9 @@ public String processRegister(
     }
 
     // Check username length
-    // Change 12 to whatever minimum you want.
-    if (username.length() < 12) {
-        model.addAttribute("error", "Username must be at least 12 characters.");
+    // allowed 4 -20 
+    if (username.length() < 4 || username.length() > 20) {
+        model.addAttribute("error", "Username must be between 4-20 characters.");
         return "registration";
     }
 
