@@ -133,7 +133,7 @@ public String processRegister(
 
     return "redirect:/login";
 
-
+        }
 
    @GetMapping("/policy")
     public String policy() {
@@ -145,7 +145,7 @@ public String guidelines() {
     return "guidelines";
 }
 
-}
+
  
 
 }
