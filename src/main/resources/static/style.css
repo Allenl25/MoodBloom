@@ -171,7 +171,9 @@ body{
     display: block;
      width: 350px;
     height: auto;
-    margin: 0 auto 30px auto;
+    margin: 0px auto 30px auto;
+    position: relative;
+    top: 30px
 } 
 
 .registration-form button{
