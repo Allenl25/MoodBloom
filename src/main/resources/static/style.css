@@ -200,6 +200,19 @@ body{
     
 }
 
+.registration-page.error-box{
+  /* Red error message box for registration mistakes */
+
+    background-color: #ffe5e5;
+    color: #b00020;
+    border: 1px solid #b00020;
+    padding: 10px;
+    margin-bottom: 15px;
+    text-align: center;
+    border-radius: 5px;
+    font-weight: bold;
+
+}
 /* Community page styles */
 .community-page {
       min-height: calc(100vh - 0px);

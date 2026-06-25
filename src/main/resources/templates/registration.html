@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<!-- This lets Thymeleaf show backend error messages on this page -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,33 +22,38 @@
 
         <h1>Register Account</h1>
 
+        <!-- This error box only appears if the backend sends an error message -->
+
+    <div class="error-box">
+    <p th:text="${error}">TEST ERROR BOX</p>
+</div>
 
 
         <!-- Textboxes Username,Email,Password, Confirm Password, Guidelines/Privacy Policies -->
     <div class="form-row">
         <label for="username">Username:</label>
-        <input type="text" id="username" name="username">
+        <input type="text" id="username" th:value="${username}" name="username">
     </div>
 
 
 
     <div class="form-row">
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email">
+        <input type="text" id="email" th:value="${email}" name="email">
     </div>
 
 
 
     <div class="form-row">
         <label for="password">Password:</label>
-        <input type="password" id="password" name="password">
+        <input type="text" id="password" name="password" th:value="${password}">
     </div>
 
 
 
     <div class="form-row">
         <label for="confirmPassword">Confirm Password:</label>
-        <input type="password" id="confirmPassword" name="confirmPassword">
+        <input type="text" id="confirmPassword" name="confirmPassword" th:value="${confirmPassword}">
     </div>
 
 
@@ -54,8 +61,9 @@
     <div class="checkbox-row">
     <!-- community guidelines checkbox -->
     
-        <input type="checkbox" id= "guidelines" name="guidelines">
+        <input type="checkbox" id= "guidelines" name="guidelines" th:checked="${guidelines != null}">
         <div class="policy-link">
+             <a href="/policy">Website Guidelines</a>
              <a href="/guidelines">Website Guidelines</a></p>
         </div> 
 
@@ -66,10 +74,10 @@
 
     
     
-        <input type="checkbox" id="privacy" name="privacy">
+        <input type="checkbox" id="privacy" name="privacy" th:checked="${privacy != null}">
         
         <div class="policy-link">
-             <a href="/policy">Privacy Policy</a></p>
+             <a href="/policy">Privacy Policy</a>
         </div>
        
     
