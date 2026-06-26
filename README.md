@@ -70,5 +70,3 @@ Details on how to set up the project follow.
 
 6. Open a web browser and navigate to:
 http://localhost:8080
-
-Note: Database functionality is currently disabled to allow the team to focus on building application features and user interface components first. A shared database may be added later in the project.
