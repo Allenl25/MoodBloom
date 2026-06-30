@@ -1,4 +1,4 @@
-package com.moodbloom.model;
+package com.moodbloom.models;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
