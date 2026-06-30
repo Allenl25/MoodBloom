@@ -18,8 +18,6 @@
 
         <h1>Log in</h1>
 
-        <p th:if="${error}" th:text="${error}" class="error-message"></p>
-
     <div class="form-row">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username">
@@ -31,7 +29,6 @@
     </div>
 
     <button type="submit" class="primary-btn">Log In</button>
-    
 
      <div class="login-link">
             <p>Don't have an account? <a href="/register">Sign up here</a></p>
