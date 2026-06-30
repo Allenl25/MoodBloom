@@ -65,8 +65,6 @@ public class User {
         return password;
     }
 
-    // TODO: When Spring Security is enabled, store hashed passwords instead of plain text.
-
     public void setPassword(String password) {
         this.password = password;
     }
