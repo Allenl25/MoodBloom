@@ -16,10 +16,10 @@ public class MoodEntry {
 
     private LocalDateTime createdAt;
 
-    // Waiting on User entity to be added
-    // @ManyToOne
-    // @JoinColumn(name = "user_id")
-    // private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public MoodEntry() {
         this.createdAt = LocalDateTime.now();
