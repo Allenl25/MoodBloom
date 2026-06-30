@@ -1,0 +1,84 @@
+.profile-page {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-form{
+    
+    width: 450px;
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(111, 143, 132, 0.25);
+
+}
+
+.profile-form h1{
+    color:#6f8f84;
+
+}
+
+.profile-form label{
+
+    display:block;
+
+    margin-top: 10px;
+
+}
+
+.profile-form input{
+
+    width: 100%;
+    padding: 8px;
+     border: 1px solid #84a79d;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.profile-form h1{
+    text-align: center;
+    margin-bottom: 35px;
+    font-size: 2rem;
+    white-space: nowrap;
+}
+
+.profile-logo{
+   
+    display: block;
+     width: 350px;
+    height: auto;
+    margin: 0px auto 30px auto;
+    position: relative;
+    top: 30px
+} 
+
+.profile-form button{
+    display: block;
+    margin: 40px auto 0 auto;
+    padding: 12px 24px;
+    background: #6f8f84;
+    color: white;
+    border: 2px solid #6f8f84;
+
+    border-radius: 25px;
+    font-weight: bold;
+
+}
+
+
+
+.profile-page.error-box{
+  /* Red error message box for profile mistakes */
+
+    background-color: #ffe5e5;
+    color: #b00020;
+    border: 1px solid #b00020;
+    padding: 10px;
+    margin-bottom: 15px;
+    text-align: center;
+    border-radius: 5px;
+    font-weight: bold;
+
+}

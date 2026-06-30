@@ -38,6 +38,12 @@ public class HomeController {
     return "community_page";
     }
 
+    @GetMapping("/profile")
+        public String profile(){
+            return "profile";
+        }
+    
+
         //logout user
     @PostMapping("/logout")
     public String logout(HttpSession session){
