@@ -71,33 +71,6 @@ public class HomeController {
     }
     */
     
-    @PostMapping("/login")
-public String processLogin(
-        @RequestParam String username,
-        @RequestParam String password,
-        Model model) {
-
-    // Print login attempt in terminal for testing
-    System.out.println("Login attempt:");
-    System.out.println("Username: " + username);
-    System.out.println("Password: " + password);
-
-    // Check if username is blank
-    if (username == null || username.isBlank()) {
-        model.addAttribute("error", "Username is left blank");
-        return "login";
-    }
-
-    // Check if password is blank
-    if (password == null || password.isBlank()) {
-        model.addAttribute("error", "Password is left blank");
-        return "login";
-    }
-
-    // No real authentication yet.
-    // For now, send user to mood tracker after typing something.
-    return "redirect:/mood_tracker";
-}
     
     @PostMapping("/register")
     public String processRegister(

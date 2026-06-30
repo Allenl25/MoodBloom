@@ -119,12 +119,6 @@ body{
     border: 2px solid #6f8f84;
 }
 
-.login-form .error-message {
-    text-align: center;
-    color: red;
-    width: 350px;
-    margin: 0 auto 10px auto;
-}
 
 
 .login-link{
