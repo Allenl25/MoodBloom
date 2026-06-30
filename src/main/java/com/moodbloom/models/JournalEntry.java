@@ -9,7 +9,7 @@ public class JournalEntry {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(nullable = false)
     private String title;
@@ -20,20 +20,25 @@ public class JournalEntry {
     @Column(nullable = false)
     private LocalDate entryDate;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
     public JournalEntry() {
     }
 
-    public JournalEntry(String title, String content, LocalDate entryDate) {
+    public JournalEntry(String title, String content, LocalDate entryDate, User user) {
         this.title = title;
         this.content = content;
         this.entryDate = entryDate;
+        this.user = user;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -61,12 +66,21 @@ public class JournalEntry {
         this.entryDate = entryDate;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public String toString() {
         return "JournalEntry{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", entryDate=" + entryDate +
+                ", user=" + (user != null ? user.getUsername() : "null") +
                 '}';
     }
 }
