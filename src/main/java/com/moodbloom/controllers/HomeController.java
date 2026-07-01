@@ -56,6 +56,16 @@ public class HomeController {
             return "profile";
         }
 
+    @GetMapping("/policy")
+    public String policy() {
+        return "policy";
+    }
+
+    @GetMapping("/guidelines")
+    public String guidelines() {
+        return "guidelines";
+    }  
+
         
     
     @PostMapping("/register")
@@ -93,10 +103,29 @@ public class HomeController {
             return "registration";
         }
 
+
+        // Check if username already exists in database
+        if (userRepository.existsByUsername(username)) {
+        model.addAttribute("error", "That username is already taken.");
+        return "registration";
+        }
+
         // Check if email is blank
         if (email == null || email.isBlank()) {
             model.addAttribute("error", "Email is left blank");
             return "registration";
+        }
+
+        // Check if email format is valid
+        if (!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")) {
+            model.addAttribute("error", "Please enter a valid email address.");
+            return "registration";
+        }
+
+        // Check if email already exists in database
+        if (userRepository.existsByEmail(email)) {
+        model.addAttribute("error", "That email is already registered.");
+        return "registration";
         }
 
         // Check if password is blank
@@ -109,6 +138,18 @@ public class HomeController {
         if (password.length() < 8) {
             model.addAttribute("error", "Password must be at least 8 characters.");
             return "registration";
+        }
+
+        //  only allow normal letters, numbers, and common special characters
+        if (!password.matches("^[A-Za-z0-9!@#$%^&*()_+=?.,-]+$")) {
+        model.addAttribute("error", "Password contains invalid characters.");
+        return "registration";
+        }
+
+        // Check if password has spaces
+        if (password.matches(".*\\s.*")) {
+            model.addAttribute("error", "Password cannot contain spaces.");
+        return "registration";
         }
 
         // Check if confirm password is blank
@@ -153,15 +194,7 @@ public class HomeController {
 
     }
 
-    @GetMapping("/policy")
-    public String policy() {
-        return "policy";
-    }
-
-    @GetMapping("/guidelines")
-    public String guidelines() {
-        return "guidelines";
-    }
+    
 
     
 

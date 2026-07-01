@@ -24,9 +24,10 @@
 
         <!-- This error box only appears if the backend sends an error message -->
 
-    <div class="error-box">
-    <p th:text="${error}">TEST ERROR BOX</p>
-</div>
+    
+        <div class="error-box" th:if="${error}">
+        <p th:text="${error}"></p>
+        </div>
 
 
         <!-- Textboxes Username,Email,Password, Confirm Password, Guidelines/Privacy Policies -->
