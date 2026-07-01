@@ -51,26 +51,12 @@ public class HomeController {
         return "community_page";
     }
 
-        //logout user -- Currently handled in SecurityConfig.java
-    /*
     @GetMapping("/profile")
         public String profile(){
             return "profile";
         }
-    
 
-        //logout user
-    @PostMapping("/logout")
-    public String logout(HttpSession session){
-        //destroys usr current login session
-        session.invalidate();
-
-        //send user back to login page after loging out
-
-        return"redirect:/login";
-    }
-    */
-    
+        
     
     @PostMapping("/register")
     public String processRegister(

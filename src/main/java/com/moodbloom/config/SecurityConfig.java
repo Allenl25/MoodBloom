@@ -53,7 +53,7 @@ public class SecurityConfig {
                     .passwordParameter("password")
 
                     // Page user is sent to after login
-                    .defaultSuccessUrl("/", true)
+                    .defaultSuccessUrl("/mood_tracker", true)
                     .permitAll()
             )
 
