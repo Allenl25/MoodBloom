@@ -186,6 +186,13 @@ body{
 
 }
 
+.registration-form button:hover {
+    background: #f6a3b4;
+    border-color: #f6a3b4;
+    color: white;
+    cursor: pointer;
+}
+
 .registration-page .checkbox-row{
 
     display:flex;
@@ -202,7 +209,7 @@ body{
     
 }
 
-.registration-page.error-box{
+.registration-page .error-box{
   /* Red error message box for registration mistakes */
 
     background-color: #ffe5e5;
