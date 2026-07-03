@@ -1,59 +1,71 @@
 /* Privacy Policy Page */
 
-
 .policy-body {
-    background-color: white;
-   
+    background: linear-gradient(180deg, #fff7fa, #f7fafc);
     margin: 0;
-    padding: 0;
+    padding: 40px 20px;
 }
 
-/* This styles the main white box/card */
+/* Main policy card */
 .policy-page {
     background-color: white;
     width: 80%;
     max-width: 800px;
-    margin: 40px auto;
-    padding: 35px;
-   
+    margin: 0 auto;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 12px 30px rgba(111, 143, 132, 0.18);
+    border: 1px solid #f3d6df;
 }
 
-/* This styles the MoodBloom logo on the policy page */
-.policy-page .registration-logo {
+/* MoodBloom logo */
+.policy-page .policy-logo {
     display: block;
-    width: 140px;
-    margin: 0 auto 20px auto;
+    width: 260px;
+    height: auto;
+    margin: 0 auto 10px auto;
 }
 
-/* This styles the main title */
+/* Main title */
 .policy-page h1 {
     text-align: center;
     color: #4f7f52;
-    margin-bottom: 25px;
+    font-size: 36px;
+    margin-bottom: 30px;
 }
 
-/* This styles the smaller section titles */
+/* Section titles */
 .policy-page h2 {
     color: #c46a91;
-    margin-top: 25px;
+    margin-top: 30px;
     margin-bottom: 8px;
+    font-size: 24px;
 }
 
-/* This styles the paragraph text */
+/* Paragraph text */
 .policy-page p {
     color: #333;
     font-size: 16px;
-    line-height: 1.6;
+    line-height: 1.7;
+    margin-bottom: 10px;
 }
 
-
+/* Back to Registration button */
 .policy-page a {
     display: inline-block;
-    margin-top: 25px;
-    padding: 12px 18px;
-    background-color: #6f8f84;;
+    margin-top: 30px;
+    padding: 12px 20px;
+    background-color: #6f8f84;
     color: white;
-    border-radius: 10px;
+    border-radius: 999px;
     font-weight: bold;
+    text-decoration: none;
+}
+
+/* Button hover */
+.policy-page a:hover {
+    background: #f6a3b4;
+    color: white;
+    cursor: pointer;
 }
 

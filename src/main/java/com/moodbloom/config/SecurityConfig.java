@@ -38,6 +38,9 @@ public class SecurityConfig {
                         "/community",
                         "/style.css",
                         "/journal.css",
+                        "/policy.css",
+                        "/profile",
+                        "/profile.css",
                         "/images/**",
                         "/css/**",
                         "/js/**"
