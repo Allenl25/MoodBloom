@@ -4,29 +4,12 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Community Page</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
         <link rel="stylesheet" href="/style.css" />
     </head>
     <body>
-        <header class="navbar">
-            <div class="navbar__brand">
-                <span><img src="../images/MoodBloomLogo_cropped.png" alt="MoodBloom Logo" /></span>
-                <div>
-                    MoodBloom
-                    <div style="font-size:0.8rem; font-weight:400; opacity:0.85;">Grow your mood</div>
-                </div>
-            </div>
+        <div th:replace="~{nav_bar :: navbar}"></div>
 
-            <nav>
-                <ul class="navbar__links">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/journal">Journal</a></li>
-                    <li><a href="/mood_tracker">Mood Tracking</a></li>
-                    <li><a href="/community">Community</a></li>
-                    <li><a href="/profile">Profile</a></li>
-                </ul>
-            </nav>
-
-            <a href="/login" class="navbar__cta">Login</a>
         </header>
 
         <main class="community-page">
@@ -72,6 +55,8 @@
                 </aside>
             </div>
         </main>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 
     <footer>
