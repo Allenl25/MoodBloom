@@ -465,19 +465,58 @@ body{
 
     @media (max-width: 700px) {
       .navbar {
-        flex-direction: column;
-        gap: 0.75rem;
-        align-items: stretch;
-      }
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-areas:
+            "brand user"
+            "links links";
+        align-items: center;
+        gap: 15px;
+    }
 
-      .navbar__links {
-        flex-wrap: wrap;
+    .navbar__brand {
+        grid-area: brand;
+    }
+
+    .navbar__user {
+        grid-area: user;
+        justify-self: end;
+    }
+
+    .navbar__links {
+        grid-area: links;
+        display: flex;
         justify-content: center;
-      }
+        flex-wrap: wrap;
+        gap: 15px;
+    }
 
-      .navbar__cta {
-        width: 100%;
+    .navbar__cta {
+        width: auto;
       }
+    }
+
+    /* User dropdown */
+
+    .dropdown-menu {
+        border: 1px solid #84a79d;
+        border-radius: 10px;
+    }
+
+    .dropdown-item {
+        color: #6f8f84 !important;
+        font-weight: 600;
+    }
+
+    .dropdown-item:hover,
+    .dropdown-item:focus {
+        background-color: #84a79d !important;
+        color: white !important;
+    }
+
+    .dropdown-item:active {
+        background-color: #6f8f84 !important;
+        color: white !important;
     }
 
     /* Mood tracker styles */
