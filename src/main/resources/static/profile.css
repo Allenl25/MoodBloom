@@ -1,84 +1,208 @@
-.profile-page {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+
+
+.profile-page
+
+ {
+     min-height: 100vh;
+
+     display: flex;
+      justify-content: center;
+    align-items: flex-start;
+     padding: 40px 20px;
 }
 
-.profile-form{
-    
-    width: 450px;
-    background: white;
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(111, 143, 132, 0.25);
-
+/*main container */
+.profile-main-card
+ {
+    width: 90%;
+    max-width: 950px;
+     background-color: white;
+    border: 1px solid #f6a3b4;
+    border-radius: 25px;
+     box-shadow: 0 10px 80px #f6a3b4;
+    padding: 45px;
+    margin-top: 20px;
 }
 
-.profile-form h1{
-    color:#6f8f84;
-
-}
-
-.profile-form label{
-
-    display:block;
-
-    margin-top: 10px;
-
-}
-
-.profile-form input{
-
+/*  rounded profile card */
+.user-info-card {
     width: 100%;
-    padding: 8px;
-     border: 1px solid #84a79d;
-    border-radius: 8px;
-    margin-bottom: 10px;
+     border: 3px solid #4f7f52;
+    border-radius: 120px;
+    background-color: white;
+    padding: 35px 45px;
+      box-shadow: 0 8px 20px rgba(79, 127, 82, 0.18);
+
+    display: flex;
+    align-items: center;
+    gap: 40px;
 }
 
-.profile-form h1{
+/* Left side image */
+.profile-image-side
+
+{
+    width: 45%;
+      display: flex;
+    justify-content: center;
+     align-items: center;
+    border-right: 2px solid #c9d8cf;
+    padding-right: 30px;
+}
+
+.profile-icon 
+{
+    width: 330px;
+    max-width: 100%;
+    height: auto;
+}
+
+/* Right side  username and details */
+.profile-details-side {
+    width: 55%;
+}
+
+.profile-details-side h3 
+{
+    color: #4f7f52;
+     font-size: 42px;
     text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Rows for Date/Posts and Journals/Moods */
+.user-stats-row 
+
+{
+    display: flex;
+    justify-content: space-between;
+    gap: 25px;
+    margin-bottom: 25px;
+}
+
+.user-stats-row p 
+
+{
+    width: 50%;
+    color: #6f8f84;
+     font-size: 22px;
+    margin: 0;
+}
+
+.user-stats-row span 
+{
+    font-weight: bold;
+    color: #4f7f52;
+}
+
+/* Form  */
+.profile-form {
+    width: 100%;
+    max-width: 450px;
+    margin: 50px auto 0 auto;
+    background: transparent;
+    padding: 0;
+    box-shadow: none;
+}
+
+.profile-form h1 
+{
+    text-align: center;
+
+     color: #f6a3b4;
     margin-bottom: 35px;
     font-size: 2rem;
-    white-space: nowrap;
 }
 
-.profile-logo{
-   
+/* Form labels + inputs */
+.profile-form label {
     display: block;
-     width: 350px;
-    height: auto;
-    margin: 0px auto 30px auto;
-    position: relative;
-    top: 30px
-} 
+    margin-top: 10px;
+}
 
-.profile-form button{
+
+.profile-form input 
+
+{
+    width: 100%;
+
+    padding: 8px;
+    border: 1px solid #84a79d;
+    border-radius: 8px;
+
+    margin-bottom: 10px;
+     box-shadow: 0 8px 20px rgba(79, 127, 82, 0.18);
+    box-sizing: border-box;
+}
+
+
+.profile-form button {
     display: block;
     margin: 40px auto 0 auto;
     padding: 12px 24px;
     background: #6f8f84;
-    color: white;
-    border: 2px solid #6f8f84;
 
+    color: white;
     border-radius: 25px;
     font-weight: bold;
 
+    border: none;
 }
 
+.profile-form button:hover {
+    background: #f6a3b4;
+    color: white;
+    cursor: pointer;
+}
 
-
-.profile-page.error-box{
-  /* Red error message box for profile mistakes */
-
-    background-color: #ffe5e5;
+/* Error box */
+.profile-page .error-box 
+{
+    background-color: #f6a3b4;
     color: #b00020;
     border: 1px solid #b00020;
     padding: 10px;
     margin-bottom: 15px;
+
     text-align: center;
+
     border-radius: 5px;
     font-weight: bold;
+}
 
+/* reponsiveness boostrap */
+@media (max-width: 800px) {
+    .user-info-card {
+        flex-direction: column;
+        border-radius: 45px;
+        padding: 30px;
+    }
+
+    .profile-image-side {
+        width: 100%;
+        border-right: none;
+        border-bottom: 2px solid #c9d8cf;
+        padding-right: 0;
+        padding-bottom: 25px;
+    }
+
+    .profile-details-side 
+    {
+
+
+        width: 100%;
+    }
+
+    .user-stats-row
+     {
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+    .user-stats-row p {
+        width: 100%;
+        text-align: center;
+    }
 }
