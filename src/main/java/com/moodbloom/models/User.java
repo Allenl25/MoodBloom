@@ -1,5 +1,5 @@
 package com.moodbloom.models;
-
+import java.time.LocalDate;
 import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +21,9 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @Column(name = "date_joined")
+    private LocalDate dateJoined;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<JournalEntry> journalEntries = new ArrayList<>();
 
@@ -34,7 +37,15 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.dateJoined = LocalDate.now();
     }
+
+    @PrePersist
+    public void setDateBeforeSaving() {
+    if (this.dateJoined == null) {
+        this.dateJoined = LocalDate.now();
+        }
+}
 
 
     public Long getId() {
@@ -84,6 +95,14 @@ public class User {
     public void setMoodEntries(List<MoodEntry> moodEntries) {
         this.moodEntries = moodEntries;
     }
+
+    public LocalDate getDateJoined() {
+    return dateJoined;
+}
+
+    public void setDateJoined(LocalDate dateJoined) {
+    this.dateJoined = dateJoined;
+}
 
     @Override
     public String toString() {
