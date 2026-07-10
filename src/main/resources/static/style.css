@@ -591,3 +591,11 @@ body{
         background: #84a79d !important;
         border: none !important;
       }
+
+      .mood-btn.selected {
+        transform: scale(1.25);
+        transition: transform 0.15s ease-in-out;
+        border: 2px solid #84a79d;
+        background-color: #f7fafc;
+        box-shadow: 0 0 10px rgba(132, 167, 157, 0.4);
+      }
