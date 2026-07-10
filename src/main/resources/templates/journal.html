@@ -61,34 +61,42 @@
                 June 18, 2026
             </p>
 
-            <div class="journal-paper">
+            <form action="/journal/save" method="post">
 
-                <input
-                    type="text"
-                    class="journal-title"
-                    placeholder="Untitled Entry">
+                <div class="journal-paper">
 
-                <textarea
-                    class="journal-entry"
-                    placeholder="How are you feeling today?"></textarea>
+                    <input
+                        type="text"
+                        name="title"
+                        class="journal-title"
+                        placeholder="Untitled Entry">
 
-            </div>
+                    <textarea
+                        name="content"
+                        class="journal-entry"
+                        placeholder="How are you feeling today?"></textarea>
 
-            <div class="journal-navigation">
+                </div>
 
-                <button class="nav-btn">
-                    ← Previous Entry
+                <div class="journal-navigation">
+
+                    <button type="button" class="nav-btn">
+                        ← Previous Entry
+                    </button>
+
+                    <button type="button" class="nav-btn">
+                        Next Entry →
+                    </button>
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="save-btn">
+                    Save Entry
                 </button>
 
-                <button class="nav-btn">
-                    Next Entry →
-                </button>
-
-            </div>
-
-            <button class="save-btn">
-                Save Entry
-            </button>
+            </form>
 
         </main>
 
