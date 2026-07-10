@@ -4,6 +4,8 @@ import com.moodbloom.models.User;
 import com.moodbloom.services.CustomUserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import com.moodbloom.repositories.UserRepository;
+import com.moodbloom.models.CommunityPost;
+import com.moodbloom.repositories.CommunityPostRepository;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,16 +16,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 
 @Controller
 public class HomeController {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final CommunityPostRepository communityPostRepository;
 
-    public HomeController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public HomeController(UserRepository userRepository, PasswordEncoder passwordEncoder, CommunityPostRepository communityPostRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.communityPostRepository = communityPostRepository;
     }
 
     @GetMapping("/")
@@ -47,7 +53,10 @@ public class HomeController {
     }
 
     @GetMapping("/community")
-    public String community() {
+    public String community(Model model) {
+        List<CommunityPost> communityPosts =
+                communityPostRepository.findAllByOrderByCreatedAtDesc();
+        model.addAttribute("communityPosts", communityPosts);
         return "community_page";
     }
 
