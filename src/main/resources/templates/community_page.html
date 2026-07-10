@@ -39,9 +39,11 @@
                             <span class="card-label">Ask a Question</span>
                             <h2>Post your question</h2>
                         </div>
-                        <form class="ask-form">
+                        <form class="ask-form" th:action="@{/community/posts}" method="post">
+                            <label for="post-title">Title</label>
+                            <input type="text" id="post-title" name="title" placeholder="Enter a title" required >
                             <label for="question-input">Your question</label>
-                            <textarea id="question-input" name="question" placeholder="Type your question here..."></textarea>
+                            <textarea id="question-input" name="content" placeholder="Type your question here..." required></textarea>
                             <button type="submit">Post Question</button>
                         </form>
                     </article>
