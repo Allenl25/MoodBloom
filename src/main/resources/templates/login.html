@@ -18,6 +18,10 @@
 
         <h1>Log in</h1>
 
+         <div class="login-error" th:if="${error != null}">
+                <p th:text="${error}"></p>
+            </div>
+
     <div class="form-row">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username">

@@ -31,10 +31,18 @@ public class HomeController {
         return "index";
     }
 
+    //throw error if user/password is incorrect.
     @GetMapping("/login")
-    public String login() {
-        return "login";
+    public String login(
+        @RequestParam(value = "error", required = false) String error,
+        Model model) {
+
+    if (error != null) {
+        model.addAttribute("error", "Invalid username or password.");
     }
+
+    return "login";
+}
 
     @GetMapping("/register")
     public String register(){
@@ -190,10 +198,7 @@ public class HomeController {
 
     }
 
-    
- 
-    
-
+   
 }
 
  
