@@ -78,6 +78,19 @@ body{
     padding-top: 10px;
 }
 
+.login-page .login-error 
+{
+    background-color: #f6a3b4;
+    color: #b00020;
+    border: 1px solid #b00020;
+    padding: 10px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    text-align: center;
+
+    border-radius: 5px;
+    font-weight: bold;
+}
 .login-form{
     width: 350px;
 
