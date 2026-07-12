@@ -1,6 +1,7 @@
 package com.moodbloom.services;
 
 import com.moodbloom.models.MoodEntry;
+import com.moodbloom.models.User;
 import com.moodbloom.repositories.MoodEntryRepository;
 import org.springframework.stereotype.Service;
 
@@ -20,5 +21,9 @@ public class MoodEntryService {
 
     public List<MoodEntry> findAll() {
         return moodEntryRepository.findAll();
+    }
+
+    public List<MoodEntry> getEntriesForUser(User user) {
+        return moodEntryRepository.findByUserOrderByCreatedAtDesc(user);
     }
 }
