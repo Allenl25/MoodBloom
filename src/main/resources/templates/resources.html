@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Mental Health Resources | MoodBloom</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        th:href="@{/style.css}"
+    >
+
+    <link
+        rel="stylesheet"
+        th:href="@{/resources.css}"
+    >
+</head>
+
+<body>
+
+<div th:replace="~{nav_bar :: navbar}"></div>
+
+<main>
+
+    <section class="resources-hero">
+        <div class="container">
+            <div class="hero-content">
+                <span class="hero-label">Support and Wellness</span>
+
+                <h1>Mental Health Resources</h1>
+
+                <p>
+                    Explore trusted support services, healthy coping strategies,
+                    and helpful information for caring for your mental wellness.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="crisis-section">
+        <div class="container">
+            <div class="crisis-card">
+
+                <div class="crisis-icon" aria-hidden="true">
+                    ♥
+                </div>
+
+                <div class="crisis-content">
+                    <h2>Need Immediate Support?</h2>
+
+                    <p>
+                        If you or someone you know is in immediate danger,
+                        call <strong>911</strong>.
+                    </p>
+
+                    <p>
+                        For emotional distress, suicidal thoughts, or a mental
+                        health crisis, call or text <strong>988</strong> to reach
+                        the Suicide &amp; Crisis Lifeline.
+                    </p>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="container">
+
+            <div class="section-heading">
+                <span>Find Support</span>
+                <h2>Trusted Mental Health Resources</h2>
+                <p>
+                    Connect with organizations that provide support,
+                    information, and treatment resources.
+                </p>
+            </div>
+
+            <div class="row g-4">
+
+                <div class="col-lg-4 col-md-6">
+                    <article class="resource-card">
+                        <div class="card-icon">☎</div>
+
+                        <h3>988 Suicide &amp; Crisis Lifeline</h3>
+
+                        <p>
+                            Receive free and confidential emotional support
+                            from trained crisis counselors.
+                        </p>
+
+                        <a
+                            href="https://988lifeline.org/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="card-link"
+                        >
+                            Visit 988 Lifeline
+                            <span aria-hidden="true">→</span>
+                        </a>
+                    </article>
+                </div>
+
+                <!-- SAMHSA -->
+                <div class="col-lg-4 col-md-6">
+                    <article class="resource-card">
+                        <div class="card-icon">⌕</div>
+
+                        <h3>FindTreatment.gov</h3>
+
+                        <p>
+                            Search for mental health and substance-use
+                            treatment providers in your area.
+                        </p>
+
+                        <a
+                            href="https://findtreatment.gov/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="card-link"
+                        >
+                            Find Treatment
+                            <span aria-hidden="true">→</span>
+                        </a>
+                    </article>
+                </div>
+
+                <!-- NAMI -->
+                <div class="col-lg-4 col-md-6">
+                    <article class="resource-card">
+                        <div class="card-icon">i</div>
+
+                        <h3>NAMI Resource Center</h3>
+
+                        <p>
+                            Explore mental health information, support options,
+                            guides, videos, and educational resources.
+                        </p>
+
+                        <a
+                            href="https://www.nami.org/resource-center/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="card-link"
+                        >
+                            Browse Resources
+                            <span aria-hidden="true">→</span>
+                        </a>
+                    </article>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Coping Strategies -->
+    <section class="content-section coping-section">
+        <div class="container">
+
+            <div class="section-heading">
+                <span>Everyday Wellness</span>
+                <h2>Healthy Coping Strategies</h2>
+                <p>
+                    Small actions may help you pause, reset, and care for
+                    yourself during a difficult moment.
+                </p>
+            </div>
+
+            <div class="row g-4">
+
+                <div class="col-lg-4 col-md-6">
+                    <article class="coping-card">
+                        <div class="coping-number">01</div>
+
+                        <div>
+                            <h3>Slow Breathing</h3>
+
+                            <p>
+                                Breathe in slowly for four seconds, hold briefly,
+                                and breathe out slowly for four seconds.
+                            </p>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <article class="coping-card">
+                        <div class="coping-number">02</div>
+
+                        <div>
+                            <h3>Ground Yourself</h3>
+
+                            <p>
+                                Name five things you can see, four you can feel,
+                                three you can hear, two you can smell, and one
+                                you can taste.
+                            </p>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <article class="coping-card">
+                        <div class="coping-number">03</div>
+
+                        <div>
+                            <h3>Write It Down</h3>
+
+                            <p>
+                                Use your MoodBloom journal to describe what
+                                happened and how the situation made you feel.
+                            </p>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <article class="coping-card">
+                        <div class="coping-number">04</div>
+
+                        <div>
+                            <h3>Take a Short Break</h3>
+
+                            <p>
+                                Step away from the stressful situation and spend
+                                a few minutes in a quiet, comfortable place.
+                            </p>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <article class="coping-card">
+                        <div class="coping-number">05</div>
+
+                        <div>
+                            <h3>Contact Someone</h3>
+
+                            <p>
+                                Reach out to a trusted friend, family member,
+                                counselor, teacher, or another supportive person.
+                            </p>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <article class="coping-card">
+                        <div class="coping-number">06</div>
+
+                        <div>
+                            <h3>Care for Your Body</h3>
+
+                            <p>
+                                Drink water, eat something nourishing, stretch,
+                                rest, or take a short walk when possible.
+                            </p>
+                        </div>
+                    </article>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- MoodBloom Tools -->
+    <section class="content-section">
+        <div class="container">
+
+            <div class="moodbloom-tools">
+
+                <div class="tools-text">
+                    <span class="tools-label">Use MoodBloom</span>
+
+                    <h2>Check In With Yourself</h2>
+
+                    <p>
+                        Record your current mood or use your private journal to
+                        reflect on what you are experiencing.
+                    </p>
+                </div>
+
+                <div class="tools-buttons">
+                    <a
+                        th:href="@{/mood_tracker}"
+                        class="resource-button primary-button"
+                    >
+                        Track Your Mood
+                    </a>
+
+                    <a
+                        th:href="@{/journal}"
+                        class="resource-button secondary-button"
+                    >
+                        Open Journal
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Disclaimer -->
+    <section class="disclaimer-section">
+        <div class="container">
+            <div class="disclaimer-card">
+                <h2>Important Notice</h2>
+
+                <p>
+                    MoodBloom provides general wellness information and is not
+                    a replacement for professional medical advice, diagnosis,
+                    treatment, or emergency services. Contact a qualified
+                    healthcare professional when you need medical or mental
+                    health assistance.
+                </p>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+></script>
+
+</body>
+</html>
