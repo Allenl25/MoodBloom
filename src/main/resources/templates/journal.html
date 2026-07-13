@@ -4,12 +4,16 @@
     <meta charset="UTF-8">
     <title>MoodBloom Journal</title>
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="/journal.css">
 </head>
+
 <body>
-    <div th:replace="~{nav_bar :: navbar}"></div>
+
+<div th:replace="~{nav_bar :: navbar}"></div>
 
 <div class="journal-container">
 
@@ -23,31 +27,20 @@
 
             <h2>Previous Entries</h2>
 
-            <div class="entry-preview">
+            <div
+                    th:each="entry : ${entries}"
+                    class="entry-preview">
 
-                <h3>Title</h3>
-                <p>June 17, 2026</p>
+                <a th:href="@{/journal(entryId=${entry.id})}"
+                   class="entry-link">
 
-            </div>
+                    <h3 th:text="${entry.title}">Title</h3>
 
-            <div class="entry-preview">
+                    <p th:text="${entry.entryDate}">
+                        Date
+                    </p>
 
-                <h3>Title</h3>
-                <p>June 16, 2026</p>
-
-            </div>
-
-            <div class="entry-preview">
-
-                <h3>Title</h3>
-                <p>June 15, 2026</p>
-
-            </div>
-
-            <div class="entry-preview">
-
-                <h3>Title</h3>
-                <p>June 14, 2026</p>
+                </a>
 
             </div>
 
@@ -57,8 +50,9 @@
 
         <main class="journal-card">
 
-            <p class="journal-date">
-                June 18, 2026
+            <p class="journal-date"
+               th:text="${currentEntry.entryDate}">
+                Date
             </p>
 
             <form action="/journal/save" method="post">
@@ -66,33 +60,39 @@
                 <div class="journal-paper">
 
                     <input
-                        type="text"
-                        name="title"
-                        class="journal-title"
-                        placeholder="Untitled Entry">
+                            type="text"
+                            name="title"
+                            class="journal-title"
+                            placeholder="Untitled Entry"
+                            th:value="${currentEntry.title}">
 
                     <textarea
-                        name="content"
-                        class="journal-entry"
-                        placeholder="How are you feeling today?"></textarea>
+                            name="content"
+                            class="journal-entry"
+                            placeholder="How are you feeling today?"
+                            th:text="${currentEntry.content}"></textarea>
 
                 </div>
 
                 <div class="journal-navigation">
 
-                    <button type="button" class="nav-btn">
+                    <button
+                            type="button"
+                            class="nav-btn">
                         ← Previous Entry
                     </button>
 
-                    <button type="button" class="nav-btn">
+                    <button
+                            type="button"
+                            class="nav-btn">
                         Next Entry →
                     </button>
 
                 </div>
 
                 <button
-                    type="submit"
-                    class="save-btn">
+                        type="submit"
+                        class="save-btn">
                     Save Entry
                 </button>
 
@@ -103,6 +103,8 @@
     </div>
 
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

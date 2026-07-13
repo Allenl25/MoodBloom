@@ -25,12 +25,16 @@ public class JournalEntryService {
 
         User user = userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("User not found."));
 
-        JournalEntry entry = new JournalEntry();
+        JournalEntry entry = journalEntryRepository.findByUserAndEntryDate(user, LocalDate.now()).orElse(null);
+
+        if (entry == null) {
+            entry = new JournalEntry();
+            entry.setUser(user);
+            entry.setEntryDate(LocalDate.now());
+        }
 
         entry.setTitle(title);
         entry.setContent(content);
-        entry.setEntryDate(LocalDate.now());
-        entry.setUser(user);
 
         journalEntryRepository.save(entry);
     }
@@ -40,5 +44,17 @@ public class JournalEntryService {
         User user = userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("User not found."));
 
         return journalEntryRepository.findByUserOrderByEntryDateDesc(user);
+    }
+
+    public JournalEntry getEntry(Long id) {
+
+        return journalEntryRepository.findById(id).orElseThrow(() -> new RuntimeException("Entry not found."));
+    }
+
+    public JournalEntry getTodaysEntry(String username) {
+
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("User not found."));
+
+        return journalEntryRepository.findByUserAndEntryDate(user, LocalDate.now()).orElse(null);
     }
 }
