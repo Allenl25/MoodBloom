@@ -2,9 +2,12 @@ package com.moodbloom.controllers;
 
 import com.moodbloom.models.User;
 import com.moodbloom.services.CustomUserDetailsService;
+import com.moodbloom.services.MoodEntryService;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import com.moodbloom.repositories.UserRepository;
 import com.moodbloom.models.CommunityPost;
+import com.moodbloom.models.MoodEntry;
 import com.moodbloom.repositories.CommunityPostRepository;
 
 import org.springframework.stereotype.Controller;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.Principal;
 import java.util.List;
 
 
@@ -25,11 +29,13 @@ public class HomeController {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final CommunityPostRepository communityPostRepository;
+    private final MoodEntryService moodEntryService;
 
-    public HomeController(UserRepository userRepository, PasswordEncoder passwordEncoder, CommunityPostRepository communityPostRepository) {
+    public HomeController(UserRepository userRepository, PasswordEncoder passwordEncoder, CommunityPostRepository communityPostRepository, MoodEntryService moodEntryService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.communityPostRepository = communityPostRepository;
+        this.moodEntryService = moodEntryService;
     }
 
     @GetMapping("/")
@@ -56,7 +62,18 @@ public class HomeController {
     }
 
     @GetMapping("/mood_tracker")
-    public String moodTracker() {
+    public String moodTracker(Model model, Principal principal) {
+        if (principal == null) {
+            return "redirect:/login";
+        }
+        
+        String username = principal.getName();
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        List<MoodEntry> entries = moodEntryService.getEntriesForUser(user);
+
+        model.addAttribute("moodEntries", entries);
         return "mood_tracker";
     }
 

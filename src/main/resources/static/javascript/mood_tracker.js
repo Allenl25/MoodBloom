@@ -33,6 +33,8 @@ document.querySelector(".mood-save-btn").addEventListener("click", async () => {
         document.getElementById("notes").value = "";
         selectedMood = null;
         document.querySelectorAll(".mood-btn").forEach(b => b.classList.remove("selected"));
+
+        window.location.reload();
     } else {
         alert("Error saving mood");
     }

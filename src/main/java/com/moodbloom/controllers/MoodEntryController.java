@@ -33,8 +33,13 @@ public class MoodEntryController {
     }
 
     @GetMapping()
-    public List<MoodEntry> getAllMoodEntries() {
-        return moodEntryService.findAll();
+    public List<MoodEntry> getMoodEntriesForUser(Principal principal) {
+        String username = principal.getName();
+
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        return moodEntryService.getEntriesForUser(user);
     }
     
 }
