@@ -94,8 +94,12 @@ public class HomeController {
     @GetMapping("/guidelines")
     public String guidelines() {
         return "guidelines";
-    }  
+    }
 
+    @GetMapping("/resources")
+    public String resources() {
+        return "resources";
+    }
         
     
     @PostMapping("/register")
