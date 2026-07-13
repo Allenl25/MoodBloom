@@ -57,33 +57,35 @@
         <section class="mt-5">
             <h3 class="recent-title">Recent Entries</h3>
 
-            <div class="recent-moods">
-
-                <div class="mood-entry">
-                    <span class="mood-icon">😊</span>
-                    <div>
-                        <span class="mood-date">June 13, 2026</span><br>
-                        <span class="mood-note">
-                            Had a good day at work.
-                        </span>
+            <th:block th:with="
+                icons=${new java.util.HashMap()},
+                _=${icons.put('happy','😊')},
+                _=${icons.put('calm','😌')},
+                _=${icons.put('excited','🤩')},
+                _=${icons.put('motivated','💪')},
+                _=${icons.put('neutral','😐')},
+                _=${icons.put('tired','😴')},
+                _=${icons.put('sad','😢')},
+                _=${icons.put('stressed','😣')},
+                _=${icons.put('angry','😠')},
+                _=${icons.put('grateful','🙏')}
+            ">
+                <div class="recent-moods">
+                    <div th:each="entry : ${moodEntries}" class="mood-entry">
+                        <span class="mood-icon" th:text="${icons[entry.mood]}"></span>
+                        <div>
+                            <span class="mood-date"
+                                th:text="${#temporals.format(entry.createdAt, 'MMMM dd, yyyy')}"></span>
+                            <br>
+                            <span class="mood-note" th:text="${entry.note}"></span>
+                        </div>
                     </div>
                 </div>
-
-                <div class="mood-entry">
-                    <span class="mood-icon">😐</span>
-                    <span class="mood-date">June 12, 2026</span>
-                </div>
-
-                <div class="mood-entry">
-                    <span class="mood-icon">😢</span>
-                    <span class="mood-date">June 11, 2026</span>
-                </div>
-
-            </div>
+            </th:block>
         </section>
 
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
+    <script src="/javascript/mood_tracker.js"></script>
 </body>
 </html>
