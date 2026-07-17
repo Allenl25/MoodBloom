@@ -26,4 +26,9 @@ public class MoodEntryService {
     public List<MoodEntry> getEntriesForUser(User user) {
         return moodEntryRepository.findByUserOrderByCreatedAtDesc(user);
     }
+
+    public MoodEntry getEntryById(Long id) {
+        return moodEntryRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Entry not found"));
+    }
 }
