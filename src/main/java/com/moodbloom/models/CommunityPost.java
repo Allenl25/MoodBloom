@@ -3,6 +3,8 @@ package com.moodbloom.models;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "community_posts")
@@ -21,17 +23,29 @@ public class CommunityPost {
     @Column(nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
+    @Column(nullable = false)
+    private boolean anonymous = false;
+
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+     @OneToMany(
+            mappedBy = "communityPost",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    @OrderBy("createdAt ASC")
+    private List<CommunityComment> comments = new ArrayList<>();
+
     public CommunityPost() {
     }
 
-    public CommunityPost(String title, String content, User user) {
+    public CommunityPost(String title, String content, User user, boolean anonymous) {
         this.title = title;
         this.content = content;
         this.user = user;
+        this.anonymous = anonymous;
     }
 
     public Long getId() {
@@ -74,12 +88,37 @@ public class CommunityPost {
         this.user = user;
     }
 
+     public boolean isAnonymous() {
+        return anonymous;
+    }
+
+    public void setAnonymous(boolean anonymous) {
+        this.anonymous = anonymous;
+    }
+
+     public List<CommunityComment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<CommunityComment> comments) {
+        this.comments = comments;
+    }
+
+    public String getDisplayName() {
+        if (anonymous) {
+            return "Anonymous";
+        }
+
+        return user != null ? user.getUsername() : "Unknown User";
+    }
+
     @Override
     public String toString() {
         return "CommunityPost{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", createdAt=" + createdAt +
+                ", anonymous=" + anonymous +
                 ", user=" + (user != null ? user.getUsername() : "null") +
                 '}';
     }
