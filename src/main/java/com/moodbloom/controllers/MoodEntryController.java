@@ -42,4 +42,22 @@ public class MoodEntryController {
         return moodEntryService.getEntriesForUser(user);
     }
     
+    @PutMapping("/{id}")
+    public MoodEntry updateMoodEntry(@PathVariable Long id, @RequestBody MoodEntry updatedEntry, Principal principal) {
+        String username = principal.getName();
+        
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        MoodEntry existing = moodEntryService.getEntryById(id);
+
+        if (!existing.getUser().getId().equals(user.getId())) {
+            throw new RuntimeException("Unauthorized");
+        }
+
+        existing.setMood(updatedEntry.getMood());
+        existing.setNote(updatedEntry.getNote());
+
+        return moodEntryService.save(existing);
+    }
 }
