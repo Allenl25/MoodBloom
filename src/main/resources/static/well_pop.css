@@ -1,0 +1,27 @@
+.pop-up-background{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    background-color: green;
+    display:flex;
+     align-items: center; 
+     justify-content: center; 
+}
+
+.pop-up-background h2{
+    color:blue;
+}
+
+.pop-up-box {
+    background-image: url("/images/MoodBloomLogo_cropped.png");
+}
+
+.pop-up-close-line {
+    float: right;
+}
+
+#close-popup:checked + .pop-up-background {
+    display: none;
+}
