@@ -30,6 +30,12 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<MoodEntry> moodEntries = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<CommunityPost> communityPosts = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<CommunityComment> communityComments = new ArrayList<>();
+
     public User() {
     }
 
@@ -97,12 +103,28 @@ public class User {
     }
 
     public LocalDate getDateJoined() {
-    return dateJoined;
-}
+        return dateJoined;
+    }
 
     public void setDateJoined(LocalDate dateJoined) {
-    this.dateJoined = dateJoined;
-}
+        this.dateJoined = dateJoined;
+    }
+
+    public List<CommunityPost> getCommunityPosts() {
+        return communityPosts;
+    }
+
+    public void setCommunityPosts(List<CommunityPost> communityPosts) {
+        this.communityPosts = communityPosts;
+    }
+
+    public List<CommunityComment> getCommunityComments() {
+        return communityComments;
+    }
+
+    public void setCommunityComments(List<CommunityComment> communityComments) {
+        this.communityComments = communityComments;
+    }
 
     @Override
     public String toString() {
