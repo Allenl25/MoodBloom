@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlsn:th="http://www.thymeleaf.org"></html>
+
+
+<link rel="stylesheet" href="/well_pop.css">
+
+<body>
+
+
+    <div th:fragment="well_frag">
+
+        <input type="checkbox" id="close-popup" hidden> 
+        <div class="pop-up-background">
+            <div class="pop-up-box">
+                <div class="pop-up-close-line">
+                
+                <label for="close-popup">X</label>
+                    </div>
+        <h2> 🌿 Daily Wellness Tip</h2>
+             
+        <p th:text="${session.loginTip}">
+            Tips appear here
+        </p>
+        </div>
+        
+    </div>
+
+    </div>
+</body>
+</html>
