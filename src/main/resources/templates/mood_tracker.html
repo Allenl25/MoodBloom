@@ -83,6 +83,10 @@
                             th:attr="data-id=${entry.id}, data-mood=${entry.mood}, data-note=${entry.note}">
                             Edit
                         </button>
+                        <button class="mood-delete-btn"
+                            th:attr="data-id=${entry.id}">
+                            Delete
+                        </button>
                     </div>
                 </div>
             </th:block>
@@ -116,6 +120,23 @@
                 </button>
 
                 <button id="closeEditBtn" class="mood-cancel-btn mt-2 w-100">
+                    Cancel
+                </button>
+            </div>
+        </div>
+
+        <div id="moodDeleteModal" class="modal-overlay" style="display:none;">
+            <div class="modal-box">
+                <h4>Delete Mood Entry?</h4>
+                <p>This will remove the entry from your history.</p>
+
+                <input type="hidden" id="moodDeleteEntryId">
+
+                <button id="confirmDeleteBtn" class="mood-confirm-delete-btn w-100 mt-3">
+                    Yes, Delete
+                </button>
+
+                <button id="cancelDeleteBtn" class="mood-cancel-btn w-100 mt-2">
                     Cancel
                 </button>
             </div>

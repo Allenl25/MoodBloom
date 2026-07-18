@@ -884,3 +884,35 @@ body{
         transform: translateY(-2px);
         box-shadow: 0 6px 18px rgba(111, 143, 132, 0.25);
       }
+
+      .mood-delete-btn {
+        background-color: #b00020;
+        color: white;
+        padding: 8px 18px;
+        border-radius: 20px;
+        font-weight: bold;
+        border: none;
+        transition: 0.25s ease;
+      }
+
+      .mood-delete-btn:hover {
+        background-color: #d32f2f;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(176, 0, 32, 0.25);
+      }
+
+      .mood-confirm-delete-btn {
+        background-color: #b00020;
+        color: white;
+        padding: 12px 24px;
+        border-radius: 25px;
+        font-weight: bold;
+        border: none;
+        transition: 0.25s ease;
+      }
+
+      .mood-confirm-delete-btn:hover {
+        background-color: #d32f2f;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(176, 0, 32, 0.25);
+      }
