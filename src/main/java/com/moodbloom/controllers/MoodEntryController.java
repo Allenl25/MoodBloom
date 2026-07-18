@@ -60,4 +60,21 @@ public class MoodEntryController {
 
         return moodEntryService.save(existing);
     }
+
+    @PutMapping("/{id}/delete")
+    public void softDeleteMoodEntry(@PathVariable Long id, Principal principal) {
+        String username = principal.getName();
+
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        MoodEntry entry = moodEntryService.getEntryById(id);
+
+        if (!entry.getUser().getId().equals(user.getId())) {
+            throw new RuntimeException("Unauthorized");
+        }
+
+        entry.setDeleted(true);
+        moodEntryService.save(entry);
+    }
 }

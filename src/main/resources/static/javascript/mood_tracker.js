@@ -67,7 +67,7 @@ document.getElementById("saveEditBtn").addEventListener("click", async () => {
 });
 
 const modal = document.getElementById("editModal");
-const modalBox = document.querySelector(".modal-box");
+const modalBox = modal.querySelector(".modal-box");
 
 modal.addEventListener("mousedown", (e) => {
     modal.dataset.outsideClick = !modalBox.contains(e.target);
@@ -81,4 +81,40 @@ modal.addEventListener("mouseup", (e) => {
 
 document.getElementById("closeEditBtn").addEventListener("click", () => {
     modal.style.display = "none";
+});
+
+document.querySelectorAll(".mood-delete-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+        document.getElementById("moodDeleteEntryId").value = btn.dataset.id;
+        document.getElementById("moodDeleteModal").style.display = "flex";
+    });
+});
+
+document.getElementById("confirmDeleteBtn").addEventListener("click", async () => {
+    const id = document.getElementById("moodDeleteEntryId").value;
+
+    const response = await fetch(`/api/mood/${id}/delete`, {
+        method: "PUT"
+    });
+
+    if (response.ok) {
+        location.reload();
+    }
+});
+
+const deleteModal = document.getElementById("moodDeleteModal");
+const deleteModalBox = deleteModal.querySelector(".modal-box");
+
+deleteModal.addEventListener("mousedown", (e) => {
+    deleteModal.dataset.outsideClick = !deleteModalBox.contains(e.target);
+});
+
+deleteModal.addEventListener("mouseup", (e) => {
+    if (deleteModal.dataset.outsideClick === "true" && !deleteModalBox.contains(e.target)) {
+        deleteModal.style.display = "none";
+    }
+});
+
+document.getElementById("cancelDeleteBtn").addEventListener("click", () => {
+    deleteModal.style.display = "none";
 });
