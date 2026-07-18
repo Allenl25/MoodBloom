@@ -93,6 +93,8 @@ public class CommunityPostController {
 
         String username = authentication.getName();
 
+        // System.out.println("AUTHENTICATED NAME: " + username);
+
         return userRepository.findByUsername(username)
                 .orElseThrow(() ->
                         new IllegalStateException(
