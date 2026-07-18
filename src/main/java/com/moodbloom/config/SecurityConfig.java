@@ -41,7 +41,6 @@ public class SecurityConfig {
                         "/journal.css",
                         "/policy.css",
                         "/resources.css",
-                        "/mood_tracker",
                         "/profile",
                         "/profile.css",
                         "/well_pop",

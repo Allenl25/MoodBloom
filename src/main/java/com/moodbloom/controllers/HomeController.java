@@ -62,7 +62,7 @@ public class HomeController {
     }
 
     @GetMapping("/mood_tracker")
-    public String moodTracker(Model model, Principal principal) {
+    public String moodTracker(Model model, Principal principal, HttpSession session) {
         if (principal == null) {
             return "redirect:/login";
         }
@@ -74,6 +74,21 @@ public class HomeController {
         List<MoodEntry> entries = moodEntryService.getEntriesForUser(user);
 
         model.addAttribute("moodEntries", entries);
+
+        
+            //welness popup
+         // Get the tip that was created during login
+        String loginTip =
+            (String) session.getAttribute("loginTip");
+
+        if (loginTip != null) {
+        // Give the tip to mood_tracker.html
+        model.addAttribute("loginTip", loginTip);
+
+        // Remove it so it does not appear again
+        session.removeAttribute("loginTip");
+    }
+
         return "mood_tracker";
     }
 
