@@ -13,11 +13,14 @@
         <div class="pop-up-background">
             <div class="pop-up-box">
                 <div class="pop-up-close-line">
+                
                 <label for="close-popup">X</label>
                     </div>
-        <h2>Wellness Tip</h2>
+        <h2> 🌿 Daily Wellness Tip</h2>
              
-        <p>Having a support system is a great way to keep YOURSELF healthy!</p>
+        <p th:text="${session.loginTip}">
+            Tips appear here
+        </p>
         </div>
         
     </div>
