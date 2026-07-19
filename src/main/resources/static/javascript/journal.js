@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const contentField = document.getElementById('journal-content');
     const editBtn = document.getElementById('edit-entry-btn');
     const saveBtn = document.getElementById('save-entry-btn');
+    const deleteBtn = document.getElementById('delete-entry-btn');
 
     const isSavedEntry = titleField.hasAttribute('readonly');
 
@@ -21,6 +22,16 @@ document.addEventListener('DOMContentLoaded', function () {
         editBtn.addEventListener('click', function () {
             setEditingMode(true);
             titleField.focus();
+        });
+    }
+
+    if (deleteBtn) {
+
+        deleteBtn.addEventListener('click', function (event) {
+
+            if (!confirm('Are you sure you want to delete this journal entry?')) {
+                event.preventDefault();
+            }
         });
     }
 });

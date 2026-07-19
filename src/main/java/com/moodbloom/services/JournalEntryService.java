@@ -35,7 +35,7 @@ public class JournalEntryService {
         }
         else {
 
-            entry = journalEntryRepository.findByUserAndEntryDate(user, LocalDate.now()).orElse(null);
+            entry = journalEntryRepository.findByUserAndEntryDateAndDeletedFalse(user, LocalDate.now()).orElse(null);
 
             if (entry == null) {
                 entry = new JournalEntry();
@@ -54,18 +54,33 @@ public class JournalEntryService {
 
         User user = userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("User not found."));
 
-        return journalEntryRepository.findByUserOrderByEntryDateDesc(user);
+        return journalEntryRepository.findByUserAndDeletedFalseOrderByEntryDateDesc(user);
     }
 
     public JournalEntry getEntry(Long id) {
 
-        return journalEntryRepository.findById(id).orElseThrow(() -> new RuntimeException("Entry not found."));
+        return journalEntryRepository.findById(id)
+                .filter(entry -> !entry.isDeleted())
+                .orElseThrow(() -> new RuntimeException("Entry not found."));
     }
 
     public JournalEntry getTodaysEntry(String username) {
 
         User user = userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("User not found."));
 
-        return journalEntryRepository.findByUserAndEntryDate(user, LocalDate.now()).orElse(null);
+        return journalEntryRepository.findByUserAndEntryDateAndDeletedFalse(user, LocalDate.now()).orElse(null);
+    }
+
+    public void deleteEntry(String username, Long entryId) {
+
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("User not found."));
+
+        JournalEntry entry = journalEntryRepository.findById(entryId)
+                .filter(existing -> existing.getUser().getId().equals(user.getId()))
+                .orElseThrow(() -> new RuntimeException("Entry not found."));
+
+        entry.setDeleted(true);
+
+        journalEntryRepository.save(entry);
     }
 }

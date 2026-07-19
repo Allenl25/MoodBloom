@@ -24,6 +24,9 @@ public class JournalEntry {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @Column(nullable = false)
+    private boolean deleted = false;
+
     public JournalEntry() {
     }
 
@@ -72,6 +75,14 @@ public class JournalEntry {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 
     @Override

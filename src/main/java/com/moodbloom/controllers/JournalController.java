@@ -54,4 +54,12 @@ public class JournalController {
         return "redirect:/journal?entryId=" + savedEntry.getId();
     }
 
+    @PostMapping("/journal/delete")
+    public String deleteJournalEntry(@RequestParam Long entryId, Authentication authentication) {
+
+        journalEntryService.deleteEntry(authentication.getName(), entryId);
+
+        return "redirect:/journal";
+    }
+
 }
