@@ -47,11 +47,11 @@ public class JournalController {
     }
 
     @PostMapping("/journal/save")
-    public String saveJournalEntry(@RequestParam String title, @RequestParam String content, Authentication authentication) {
+    public String saveJournalEntry(@RequestParam(required = false) Long entryId, @RequestParam String title, @RequestParam String content, Authentication authentication) {
 
-        journalEntryService.saveEntry(authentication.getName(), title, content);
+        JournalEntry savedEntry = journalEntryService.saveEntry(authentication.getName(), entryId, title, content);
 
-        return "redirect:/journal";
+        return "redirect:/journal?entryId=" + savedEntry.getId();
     }
 
 }

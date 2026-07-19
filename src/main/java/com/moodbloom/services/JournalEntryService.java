@@ -21,22 +21,33 @@ public class JournalEntryService {
         this.userRepository = userRepository;
     }
 
-    public void saveEntry(String username, String title, String content) {
+    public JournalEntry saveEntry(String username, Long entryId, String title, String content) {
 
         User user = userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("User not found."));
 
-        JournalEntry entry = journalEntryRepository.findByUserAndEntryDate(user, LocalDate.now()).orElse(null);
+        JournalEntry entry;
 
-        if (entry == null) {
-            entry = new JournalEntry();
-            entry.setUser(user);
-            entry.setEntryDate(LocalDate.now());
+        if (entryId != null) {
+
+            entry = journalEntryRepository.findById(entryId)
+                    .filter(existing -> existing.getUser().getId().equals(user.getId()))
+                    .orElseThrow(() -> new RuntimeException("Entry not found."));
+        }
+        else {
+
+            entry = journalEntryRepository.findByUserAndEntryDate(user, LocalDate.now()).orElse(null);
+
+            if (entry == null) {
+                entry = new JournalEntry();
+                entry.setUser(user);
+                entry.setEntryDate(LocalDate.now());
+            }
         }
 
         entry.setTitle(title);
         entry.setContent(content);
 
-        journalEntryRepository.save(entry);
+        return journalEntryRepository.save(entry);
     }
 
     public List<JournalEntry> getEntriesForUser(String username) {
