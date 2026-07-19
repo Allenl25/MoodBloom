@@ -268,3 +268,30 @@
     background: #b7c6c1;
     cursor: not-allowed;
 }
+
+/* Delete Button */
+
+.delete-btn {
+    background: white;
+
+    border: 2px solid #c0605a;
+
+    color: #c0605a;
+
+    padding: 12px 24px;
+
+    border-radius: 25px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+
+    margin-left: auto;
+}
+
+.delete-btn:hover {
+    background: #c0605a;
+    color: white;
+}

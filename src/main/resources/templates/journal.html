@@ -117,6 +117,16 @@
                         Save Entry
                     </button>
 
+                    <button
+                            type="submit"
+                            id="delete-entry-btn"
+                            class="delete-btn"
+                            formaction="/journal/delete"
+                            formnovalidate
+                            th:if="${currentEntry.id != null}">
+                        Delete Entry
+                    </button>
+
                 </div>
 
             </form>
