@@ -318,13 +318,12 @@ body{
       border-radius: 1.25rem;
       padding: 1.75rem;
       box-shadow: 0 20px 40px rgba(120, 60, 10, 0.08);
-      border: 1px solid #6f8f84(225, 170, 120, 0.18);
+      border: 1px solid rgba(225, 170, 120, 0.18);
     }
 
     .card-header {
       margin-bottom: 1.25rem;
     }
-
 
     .card-label {
       display: inline-flex;
@@ -336,30 +335,18 @@ body{
       color: #f6a3b4;
     }
 
-    .faq-card h1,
-    .ask-card h2 {
+    .community-feed-card h1,
+    .ask-card h2,
+    .posts-card h2 {
       margin: 0;
       font-size: 1.75rem;
       color: #000000;
     }
 
-    .faq-item {
-      margin-top: 1rem;
-      padding-top: 1rem;
-      border-top: 1px solid #f3dfd1;
-    }
-
-    .faq-item strong {
-      display: block;
-      font-size: 1rem;
-      margin-bottom: 0.35rem;
-      color: #000000;
-    }
-
-    .faq-item p {
-      margin: 0;
-      color: #000000;
-      line-height: 1.6;
+    .community-feed-card {
+      width: 100%;
+      max-height: 700px;
+      overflow-y: auto;
     }
 
     .ask-form {
@@ -370,6 +357,21 @@ body{
     .ask-form label {
       font-weight: 600;
       color: #000000;
+    }
+
+    .ask-form input[type="text"] {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #888888;
+      background: #ffffff;
+      font-family: inherit;
+      color: #000000;
+    }
+
+    .ask-form input[type="text"]:focus {
+      outline: none;
+      border-color: #f6a3b4;
+      box-shadow: 0 5px 20px rgba(111, 143, 132, 0.45);
     }
 
     .ask-form textarea {
@@ -391,7 +393,8 @@ body{
       box-shadow: 0 5px 33px rgba(111, 143, 132, 1);
     }
 
-    .ask-form button {
+    .ask-form button,
+    .comment-form button {
       width: fit-content;
       padding: 0.95rem 1.5rem;
       border: none;
@@ -403,7 +406,8 @@ body{
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .ask-form button:hover {
+    .ask-form button:hover,
+    .comment-form button:hover {
       transform: translateY(-1px);
       box-shadow: 0 14px 30px #6f8f84;
     }
@@ -441,9 +445,10 @@ body{
       color: rgba(255, 255, 255, 0.92);
       line-height: 1.8;
     }
+
     .posts-card {
       width: 100%;
-      max-height: 450px;
+      max-height: 600px;
       overflow-y: auto;
     }
 
@@ -462,15 +467,95 @@ body{
       color: #000000;
     }
 
-    .post-item p {
+    .post-item > strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      color: #6f8f84;
+    }
+
+    .post-item > p {
       margin-bottom: 0.75rem;
       color: #000000;
       line-height: 1.5;
     }
 
     .post-item small {
-      color: #888;
-      font-size: 0.8rem;}
+      color: #888888;
+      font-size: 0.8rem;
+    }
+
+    .comments-section {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid #f3dfd1;
+    }
+
+    .comment-item {
+      margin-top: 0.75rem;
+      padding: 0.85rem;
+      border-radius: 0.75rem;
+      background-color: #fdedf0;
+    }
+
+    .comment-item strong {
+      display: block;
+      margin-bottom: 0.35rem;
+      font-size: 0.9rem;
+      color: #6f8f84;
+    }
+
+    .comment-item p {
+      margin: 0 0 0.5rem;
+      color: #000000;
+      line-height: 1.5;
+    }
+
+    .comment-item small {
+      display: block;
+      color: #888888;
+      font-size: 0.75rem;
+    }
+
+    .comment-form {
+      display: grid;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .comment-form textarea {
+      width: 100%;
+      min-height: 80px;
+      padding: 0.85rem;
+      border: 1px solid #f6a3b4;
+      border-radius: 0.75rem;
+      background-color: #ffffff;
+      resize: vertical;
+      font-family: inherit;
+      color: #000000;
+      line-height: 1.5;
+    }
+
+    .comment-form textarea:focus {
+      outline: none;
+      border-color: #f6a3b4;
+      box-shadow: 0 5px 20px rgba(111, 143, 132, 0.45);
+    }
+
+    .anonymous-option {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      width: fit-content;
+      font-weight: 400;
+      color: #000000;
+    }
+
+    .anonymous-option input {
+      width: auto;
+      margin: 0;
+      cursor: pointer;
+    }
 
     @media (max-width: 900px) {
       .community-page__container {
@@ -479,6 +564,11 @@ body{
 
       .community-side {
         order: -1;
+      }
+
+      .community-feed-card,
+      .posts-card {
+        max-height: none;
       }
     }
 /* Nav Bar Styling */
@@ -682,4 +772,147 @@ body{
         border: 2px solid #84a79d;
         background-color: #f7fafc;
         box-shadow: 0 0 10px rgba(132, 167, 157, 0.4);
+      }
+
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 2000;
+      }
+
+      .modal-box {
+        background: white;
+        padding: 25px;
+        border-radius: 10px;
+        width: 90%;
+        max-width: 400px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      }
+
+      .modal-box select,
+      .modal-box textarea {
+        border: 1px solid #84a79d !important;
+        outline: none !important;
+        box-shadow: none !important;
+        border-radius: 12px;
+        padding: 10px;
+        color: #6f8f84;
+      }
+
+      .modal-box select:hover,
+      .modal-box textarea:hover {
+        border-color: #6f8f84;
+        box-shadow: 0 0 10px rgba(132, 167, 157, 0.4);
+      }
+
+      .mood-edit-btn {
+        background-color: #6f8f84;
+        color: white;
+        padding: 8px 18px;
+        border-radius: 20px;
+        font-weight: bold;
+        border: none;
+        transition: 0.25s ease;
+      }
+
+      .mood-edit-btn:hover {
+        background-color: #84a79d;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(132, 167, 157, 0.4);
+      }
+
+      .mood-save-edit-btn {
+        background-color: #84a79d;
+        color: white;
+        padding: 12px 24px;
+        border-radius: 25px;
+        font-weight: bold;
+        border: none;
+        transition: 0.25s ease;
+      }
+
+      .mood-save-edit-btn:hover {
+        background-color: #6f8f84;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(111, 143, 132, 0.25);
+      }
+
+      .mood-cancel-btn {
+        background-color: white;
+        color: #6f8f84;
+        border: 2px solid #6f8f84;
+        padding: 12px 24px;
+        border-radius: 25px;
+        font-weight: bold;
+        transition: 0.25s ease;
+      }
+
+      .mood-cancel-btn:hover {
+        background-color: #f7fafc;
+        border-color: #84a79d;
+        color: #84a79d;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(132, 167, 157, 0.25);
+      }
+
+      .mood-edit-select,
+      .mood-edit-textarea {
+        border: 1px solid #84a79d;
+        outline: none;
+        box-shadow: none;
+        border-radius: 12px;
+        padding: 10px;
+        color: #6f8f84;
+        width: 100%;
+      }
+
+      .mood-edit-select:hover,
+      .mood-edit-textarea:hover {
+        border-color: #6f8f84;
+        box-shadow: 0 0 10px rgba(132, 167, 157, 0.4);
+      }
+
+      .mood-save-btn:hover {
+        background-color: #6f8f84;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(111, 143, 132, 0.25);
+      }
+
+      .mood-delete-btn {
+        background-color: #b00020;
+        color: white;
+        padding: 8px 18px;
+        border-radius: 20px;
+        font-weight: bold;
+        border: none;
+        transition: 0.25s ease;
+      }
+
+      .mood-delete-btn:hover {
+        background-color: #d32f2f;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(176, 0, 32, 0.25);
+      }
+
+      .mood-confirm-delete-btn {
+        background-color: #b00020;
+        color: white;
+        padding: 12px 24px;
+        border-radius: 25px;
+        font-weight: bold;
+        border: none;
+        transition: 0.25s ease;
+      }
+
+      .mood-confirm-delete-btn:hover {
+        background-color: #d32f2f;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(176, 0, 32, 0.25);
       }

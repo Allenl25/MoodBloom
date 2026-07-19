@@ -16,6 +16,8 @@ public class MoodEntry {
 
     private LocalDateTime createdAt;
 
+    @Column(nullable = false)
+    private boolean deleted = false;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -55,6 +57,14 @@ public class MoodEntry {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 
     public User getUser() {

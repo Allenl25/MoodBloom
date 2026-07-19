@@ -24,11 +24,20 @@ public class User {
     @Column(name = "date_joined")
     private LocalDate dateJoined;
 
+    @Column (nullable = false)
+    private boolean active = true;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<JournalEntry> journalEntries = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<MoodEntry> moodEntries = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<CommunityPost> communityPosts = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<CommunityComment> communityComments = new ArrayList<>();
 
     public User() {
     }
@@ -97,12 +106,44 @@ public class User {
     }
 
     public LocalDate getDateJoined() {
-    return dateJoined;
-}
+        return dateJoined;
+    }
 
     public void setDateJoined(LocalDate dateJoined) {
-    this.dateJoined = dateJoined;
-}
+        this.dateJoined = dateJoined;
+    }
+
+    public List<CommunityPost> getCommunityPosts() {
+        return communityPosts;
+    }
+
+    public void setCommunityPosts(List<CommunityPost> communityPosts) {
+        this.communityPosts = communityPosts;
+    }
+
+    public List<CommunityComment> getCommunityComments() {
+        return communityComments;
+    }
+
+    public void setCommunityComments(List<CommunityComment> communityComments) {
+        this.communityComments = communityComments;
+    }
+        //account soft delete
+    public boolean isActive() {
+    return active;
+    }
+
+    public void setActive(boolean active) {
+    this.active = active;
+    }
+
+    public String getDisplayUsername() {
+    if (active) {
+        return username;
+    }
+
+    return "Deleted_User";
+    }
 
     @Override
     public String toString() {

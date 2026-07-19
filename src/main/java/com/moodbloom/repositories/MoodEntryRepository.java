@@ -8,5 +8,5 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MoodEntryRepository extends JpaRepository<MoodEntry, Long>{
-    List<MoodEntry> findByUserOrderByCreatedAtDesc(User user);
+    List<MoodEntry> findByUserAndDeletedFalseOrderByCreatedAtDesc(User user);
 }

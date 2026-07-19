@@ -14,22 +14,52 @@
             <div class="community-page__container">
                 <section class="community-panel">
                     <!-- Top left Box -->
-                    <article class="community-card faq-card">
+                    <article class="community-card community-feed-card">
                         <div class="card-header">
-                            <span class="card-label">Common Questions</span>
-                            <h1>Frequently Asked Questions</h1>
+                            <span class="card-label">Community Feed</span>
+                            <h1>Recent Community Posts</h1>
                         </div>
-                        <div class="faq-item">
-                            <strong>Question 1?</strong>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <p class="empty-message" th:if="${#lists.isEmpty(communityPosts)}">No community posts have been created yet. </p>
+
+                        <div class="community-feed-post" th:each="post : ${communityPosts}">
+                            <div class="post-header">
+                                <div> 
+                                    <h3 th:text="${post.title}"> Post Title </h3>
+                                    <strong th:text="${post.displayName}"> Username </strong>
+                                </div>
+
+                                <small th:text="${#temporals.format(post.createdAt,'MMMM dd, yyyy HH:mm')}">Post Date</small>
+                            </div>
+
+                            <p class="post-content" th:text="${post.content}"> Post Content</p>
+
+                        <div class="comments-section">
+                            <h4>Comments</h4>
+
+                        <p class="empty-message" th:if="${#lists.isEmpty(post.comments)}">No comments yet.</p>
+
+                        <div class="comment-item"th:each="comment : ${post.comments}">
+                        <div class="comment-header">
+                            <strong th:text="${comment.displayName}"> Username </strong>
+
+                            <small th:text="${#temporals.format(comment.createdAt,'MMMM dd, yyyy HH:mm')}">Comment Date</small>
                         </div>
-                        <div class="faq-item">
-                            <strong>Question 2?</strong>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+
+                        <p th:text="${comment.content}">Comment Content</p>
+                    </div>
+
+                    <form class="comment-form" th:action="@{/community/posts/{postId}/comments(postId=${post.id})}"method="post">
+                        <label th:for="'community-comment-' + ${post.id}">Add a comment </label>
+
+                        <textarea th:id="'community-comment-' + ${post.id}"name="content" placeholder="Write your comment..." maxlength="1000"required></textarea>
+
+                        <label class="anonymous-option">
+                            <input type="checkbox" name="anonymous" value="true">Comment anonymously</input>
+                        </label>
+
+                        <button type="submit"> Post Comment </button>
+                        </form>
                         </div>
-                        <div class="faq-item">
-                            <strong>Question 3?</strong>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                         </div>
                     </article>
                     <!-- Bottom left Box-->
@@ -44,6 +74,7 @@
                             <label for="question-input">Your question</label>
                             <textarea id="question-input" name="content" placeholder="Type your question here..." required></textarea>
                             <button type="submit">Post Question</button>
+                            <label class="anonymous-option"><input type="checkbox" name="anonymous" value="true">Post anonymously</input></label>
                         </form>
                     </article>                  
                 </section>
@@ -57,14 +88,33 @@
                     <!-- Community Posts Section Buttom right box --> 
                     <div class="community-card posts-card">
                         <div class="card-header">
-                            <span class="card-label">Community Posts</span>
-                            <h2>Recent Community Posts </h2>
+                            <span class="card-label">Your Posts</span>
+                            <h2>Your Recent Posts</h2>
                         </div>
+
                         <div class="posts-list">
-                            <div th:each="post : ${communityPosts}" class="post-item">
+                            <div th:each="post : ${userPosts}" class="post-item">
                                 <h3 th:text="${post.title}">Post Title</h3>
+
                                 <p th:text="${post.content}">Post Content</p>
-                                <small th:text="${#temporals.format(post.createdAt, 'MMMM dd, yyyy HH:mm')}"> Post Date </small>
+
+                                <small th:text="${#temporals.format(post.createdAt, 'MMMM dd, yyyy HH:mm')}">Post Date</small>
+
+                                <div class="comments-section">
+
+                                    <div th:if="${#lists.isEmpty(post.comments)}">
+                                        <small>No comments yet.</small>
+                                    </div>
+
+                                    <div th:each="comment : ${post.comments}" class="comment-item">
+                                        <strong th:text="${comment.displayName}">Username</strong>
+
+                                        <p th:text="${comment.content}">Comment Content</p>
+
+                                        <small th:text="${#temporals.format(comment.createdAt, 'MMMM dd, yyyy HH:mm')}">Comment Date</small>
+                    
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -76,6 +126,7 @@
         <footer>
         
         </footer>
+        
     </body>
 
     
