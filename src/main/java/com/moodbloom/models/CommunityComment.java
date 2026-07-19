@@ -92,12 +92,14 @@ public class CommunityComment {
     }
 
     public String getDisplayName() {
-        if (anonymous) {
-            return "Anonymous";
-        }
-
-        return user != null ? user.getUsername() : "Unknown User";
+    if (anonymous) {
+        return "Anonymous";
     }
+
+    return user != null
+            ? user.getDisplayUsername()
+            : "Unknown User";
+}
 
     @Override
     public String toString() {
