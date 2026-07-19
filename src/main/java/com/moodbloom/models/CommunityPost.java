@@ -103,15 +103,16 @@ public class CommunityPost {
     public void setComments(List<CommunityComment> comments) {
         this.comments = comments;
     }
-
+        //added some for profile page delete button
     public String getDisplayName() {
-        if (anonymous) {
-            return "Anonymous";
-        }
-
-        return user != null ? user.getUsername() : "Unknown User";
+    if (anonymous) {
+        return "Anonymous";
     }
 
+    return user != null
+            ? user.getDisplayUsername()
+            : "Unknown User";
+}
     @Override
     public String toString() {
         return "CommunityPost{" +

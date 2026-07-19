@@ -24,6 +24,9 @@ public class User {
     @Column(name = "date_joined")
     private LocalDate dateJoined;
 
+    @Column (nullable = false)
+    private boolean active = true;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<JournalEntry> journalEntries = new ArrayList<>();
 
@@ -124,6 +127,22 @@ public class User {
 
     public void setCommunityComments(List<CommunityComment> communityComments) {
         this.communityComments = communityComments;
+    }
+        //account soft delete
+    public boolean isActive() {
+    return active;
+    }
+
+    public void setActive(boolean active) {
+    this.active = active;
+    }
+
+    public String getDisplayUsername() {
+    if (active) {
+        return username;
+    }
+
+    return "Deleted_User";
     }
 
     @Override

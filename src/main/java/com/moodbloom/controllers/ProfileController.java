@@ -2,7 +2,7 @@ package com.moodbloom.controllers;
 
 import java.security.Principal;
 import java.util.Optional;
-
+import jakarta.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -188,6 +188,32 @@ public String updateProfile(
 
         return "redirect:/profile";
 }
+@PostMapping("/profile/delete")
+public String deleteAccount(
+        Principal principal,
+        HttpSession session
+) {
+    if (principal == null) {
+        return "redirect:/login";
+    }
+
+    String username = principal.getName();
+
+    User user = userRepository.findByUsername(username)
+            .orElseThrow(() ->
+                    new RuntimeException("User not found")
+            );
+
+    // Soft delete the account
+    user.setActive(false);
+    userRepository.save(user);
+
+    // Log the user out
+    session.invalidate();
+
+    return "redirect:/login";
+}
+
 }
 
 

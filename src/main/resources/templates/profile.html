@@ -103,12 +103,40 @@
                 <input type="password" id="confirmPassword" name="confirmPassword">
             </div>
 
-            <button type="submit">Update Profile</button>
-
         </form>
 
-    </div>
+        
+            <!-- Buttons are outside the update form -->
+            <div class="profile-action-buttons">
 
+                <!-- This button submits profile-update-form -->
+                <button type="submit"
+                        form="profile-update-form"
+                        class="update-profile-button">
+
+                    Update Profile
+
+                </button>
+
+
+                <!-- Delete account uses its own form -->
+                <form th:action="@{/profile/delete}"
+                      method="post"
+                      class="delete-account-form"
+                      onsubmit="return confirm('Are you sure you want to delete your account? This action cannot be undone.');">
+
+                    <button type="submit"
+                            class="delete-account-button">
+
+                        Delete Account
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
 </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
