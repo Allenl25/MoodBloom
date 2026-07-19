@@ -55,22 +55,32 @@
                 Date
             </p>
 
-            <form action="/journal/save" method="post">
+            <form action="/journal/save" method="post" id="journal-form">
+
+                <input
+                        type="hidden"
+                        name="entryId"
+                        th:if="${currentEntry.id != null}"
+                        th:value="${currentEntry.id}">
 
                 <div class="journal-paper">
 
                     <input
                             type="text"
                             name="title"
+                            id="journal-title"
                             class="journal-title"
                             placeholder="Untitled Entry"
-                            th:value="${currentEntry.title}">
+                            th:value="${currentEntry.title}"
+                            th:readonly="${currentEntry.id != null}">
 
                     <textarea
                             name="content"
+                            id="journal-content"
                             class="journal-entry"
                             placeholder="How are you feeling today?"
-                            th:text="${currentEntry.content}"></textarea>
+                            th:text="${currentEntry.content}"
+                            th:readonly="${currentEntry.id != null}"></textarea>
 
                 </div>
 
@@ -90,11 +100,24 @@
 
                 </div>
 
-                <button
-                        type="submit"
-                        class="save-btn">
-                    Save Entry
-                </button>
+                <div class="journal-actions">
+
+                    <button
+                            type="button"
+                            id="edit-entry-btn"
+                            class="edit-btn"
+                            th:if="${currentEntry.id != null}">
+                        Edit Entry
+                    </button>
+
+                    <button
+                            type="submit"
+                            id="save-entry-btn"
+                            class="save-btn">
+                        Save Entry
+                    </button>
+
+                </div>
 
             </form>
 
@@ -105,6 +128,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/javascript/journal.js"></script>
 
 </body>
 </html>

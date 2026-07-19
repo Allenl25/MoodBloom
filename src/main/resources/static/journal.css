@@ -162,6 +162,11 @@
     outline: none;
 }
 
+.journal-title[readonly],
+.journal-entry[readonly] {
+    cursor: default;
+}
+
 /* Navigation Buttons */
 
 .journal-navigation {
@@ -195,11 +200,50 @@
     color: white;
 }
 
+/* Entry Actions */
+
+.journal-actions {
+    display: flex;
+
+    gap: 15px;
+
+    margin-top: 20px;
+}
+
+/* Edit Button */
+
+.edit-btn {
+    background: white;
+
+    border: 2px solid #6f8f84;
+
+    color: #6f8f84;
+
+    padding: 12px 24px;
+
+    border-radius: 25px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+}
+
+.edit-btn:hover:not(:disabled) {
+    background: #6f8f84;
+    color: white;
+}
+
+.edit-btn:disabled {
+    border-color: #b7c6c1;
+    color: #b7c6c1;
+    cursor: not-allowed;
+}
+
 /* Save Button */
 
 .save-btn {
-    margin-top: 20px;
-
     background: #6f8f84;
     color: white;
 
@@ -216,6 +260,11 @@
     transition: .2s ease;
 }
 
-.save-btn:hover {
+.save-btn:hover:not(:disabled) {
     background: #5e7d73;
+}
+
+.save-btn:disabled {
+    background: #b7c6c1;
+    cursor: not-allowed;
 }
