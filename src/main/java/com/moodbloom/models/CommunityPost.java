@@ -28,6 +28,7 @@ public class CommunityPost {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+
     private User user;
 
      @OneToMany(
@@ -35,8 +36,18 @@ public class CommunityPost {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
+
     @OrderBy("createdAt ASC")
     private List<CommunityComment> comments = new ArrayList<>();
+
+    @OneToMany(
+        mappedBy = "communityPost",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
+
+    private List<CommunityReaction> reactions =
+        new ArrayList<>();
 
     public CommunityPost() {
     }
@@ -102,6 +113,18 @@ public class CommunityPost {
 
     public void setComments(List<CommunityComment> comments) {
         this.comments = comments;
+    }
+
+    public List<CommunityReaction> getReactions() {
+    return reactions;
+    }
+
+    public long getLikeCount() {
+        return reactions.stream().filter(reaction ->reaction.getReactionType()== ReactionType.LIKE).count();
+    }
+
+    public long getSupportCount() {
+        return reactions.stream().filter(reaction ->reaction.getReactionType()== ReactionType.SUPPORT).count();
     }
         //added some for profile page delete button
     public String getDisplayName() {
