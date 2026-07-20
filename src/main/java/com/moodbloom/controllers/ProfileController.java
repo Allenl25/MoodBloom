@@ -43,9 +43,9 @@ public class ProfileController {
         model.addAttribute("email", user.getEmail());
         model.addAttribute("username", user.getUsername());
         model.addAttribute("dateJoined", user.getDateJoined());
-        model.addAttribute("postTotal", -1);
-        model.addAttribute("journalTotal", -1);
-        model.addAttribute("moodTotal",  -1);
+        model.addAttribute("postTotal", user.getCommunityPosts().size());
+        model.addAttribute("journalTotal", user.getJournalEntries().size());
+        model.addAttribute("moodTotal",user.getMoodEntries().size());
         
 
         return "profile";

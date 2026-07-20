@@ -54,7 +54,7 @@
                         <textarea th:id="'community-comment-' + ${post.id}"name="content" placeholder="Write your comment..." maxlength="1000"required></textarea>
 
                         <label class="anonymous-option">
-                            <input type="checkbox" name="anonymous" value="true">Comment anonymously</input>
+                            <input type="checkbox" name="anonymous" value="true">Comment anonymously<input>
                         </label>
 
                         <button type="submit"> Post Comment </button>
@@ -74,7 +74,7 @@
                             <label for="question-input">Your question</label>
                             <textarea id="question-input" name="content" placeholder="Type your question here..." required></textarea>
                             <button type="submit">Post Question</button>
-                            <label class="anonymous-option"><input type="checkbox" name="anonymous" value="true">Post anonymously</input></label>
+                            <label class="anonymous-option"><input type="checkbox" name="anonymous" value="true">Post anonymously></label>
                         </form>
                     </article>                  
                 </section>
