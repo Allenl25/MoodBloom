@@ -349,6 +349,18 @@ body{
       overflow-y: auto;
     }
 
+    .community-feed-post {
+      padding-bottom: 2rem;
+      margin-bottom: 2rem;
+      border-bottom: 2px solid #f3dfd1;
+    }
+
+    .community-feed-post:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
     .ask-form {
       display: grid;
       gap: 1rem;
