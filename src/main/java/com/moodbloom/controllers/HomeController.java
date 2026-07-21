@@ -20,6 +20,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -31,7 +32,12 @@ public class HomeController {
     private final CommunityPostRepository communityPostRepository;
     private final MoodEntryService moodEntryService;
 
-    public HomeController(UserRepository userRepository, PasswordEncoder passwordEncoder, CommunityPostRepository communityPostRepository, MoodEntryService moodEntryService) {
+    public HomeController(
+            UserRepository userRepository,
+            PasswordEncoder passwordEncoder,
+            CommunityPostRepository communityPostRepository,
+            MoodEntryService moodEntryService
+    ) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.communityPostRepository = communityPostRepository;
@@ -46,60 +52,169 @@ public class HomeController {
     //throw error if user/password is incorrect.
     @GetMapping("/login")
     public String login(
-        @RequestParam(value = "error", required = false) String error,
-        Model model) {
+            @RequestParam(value = "error", required = false) String error,
+            Model model
+    ) {
 
-    if (error != null) {
-        model.addAttribute("error", "Invalid username or password.");
+        if (error != null) {
+            model.addAttribute("error", "Invalid username or password.");
+        }
+
+        return "login";
     }
 
-    return "login";
-}
-
     @GetMapping("/register")
-    public String register(){
+    public String register() {
         return "registration";
     }
 
     @GetMapping("/mood_tracker")
-    public String moodTracker(Model model, Principal principal, HttpSession session) {
+    public String moodTracker(
+            Model model,
+            Principal principal,
+            HttpSession session
+    ) {
         if (principal == null) {
             return "redirect:/login";
         }
-        
+
         String username = principal.getName();
+
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        List<MoodEntry> entries = moodEntryService.getEntriesForUser(user);
+        List<MoodEntry> entries =
+                moodEntryService.getEntriesForUser(user);
 
         model.addAttribute("moodEntries", entries);
 
-        
-            //welness popup
-         // Get the tip that was created during login
+        //welness popup
+        // Get the tip that was created during login
         String loginTip =
-            (String) session.getAttribute("loginTip");
+                (String) session.getAttribute("loginTip");
 
         if (loginTip != null) {
-        // Give the tip to mood_tracker.html
-        model.addAttribute("loginTip", loginTip);
+            // Give the tip to mood_tracker.html
+            model.addAttribute("loginTip", loginTip);
 
-        // Remove it so it does not appear again
-        session.removeAttribute("loginTip");
-    }
+            // Remove it so it does not appear again
+            session.removeAttribute("loginTip");
+        }
 
         return "mood_tracker";
     }
 
     @GetMapping("/community")
-    public String community(Model model) {
-        List<CommunityPost> communityPosts =
-                communityPostRepository.findAllByOrderByCreatedAtDesc();
-        model.addAttribute("communityPosts", communityPosts);
+    public String community(
+            @RequestParam(
+                    value = "keyword",
+                    required = false,
+                    defaultValue = ""
+            ) String keyword,
+
+            @RequestParam(
+                    value = "authorFilter",
+                    required = false,
+                    defaultValue = "all"
+            ) String authorFilter,
+
+            @RequestParam(
+                    value = "sort",
+                    required = false,
+                    defaultValue = "newest"
+            ) String sort,
+
+            Model model,
+            Principal principal
+    ) {
+
+        List<CommunityPost> communityPosts;
+
+        /*
+         * Search post titles and content when the user
+         * enters a keyword.
+         */
+        if (keyword != null && !keyword.isBlank()) {
+            communityPosts =
+                    communityPostRepository
+                            .findByTitleContainingIgnoreCaseOrContentContainingIgnoreCaseOrderByCreatedAtDesc(
+                                    keyword.trim(),
+                                    keyword.trim()
+                            );
+        } else {
+            communityPosts =
+                    communityPostRepository
+                            .findAllByOrderByCreatedAtDesc();
+        }
+
+        /*
+         * Filter posts based on whether the author
+         * posted anonymously or used their username.
+         */
+        if ("anonymous".equalsIgnoreCase(authorFilter)) {
+            communityPosts.removeIf(
+                    post -> !post.isAnonymous()
+            );
+        } else if ("named".equalsIgnoreCase(authorFilter)) {
+            communityPosts.removeIf(
+                    CommunityPost::isAnonymous
+            );
+        }
+
+        /*
+         * The repository already returns newest first.
+         * Reverse the list when oldest is selected.
+         */
+        if ("oldest".equalsIgnoreCase(sort)) {
+            communityPosts.sort(
+                    Comparator.comparing(
+                            CommunityPost::getCreatedAt
+                    )
+            );
+        }
+
+        /*
+         * Load the signed-in user's posts for the
+         * Your Recent Posts section.
+         */
+        if (principal != null) {
+            User user = userRepository
+                    .findByUsername(principal.getName())
+                    .orElseThrow(
+                            () -> new RuntimeException("User not found")
+                    );
+
+            List<CommunityPost> userPosts =
+                    communityPostRepository
+                            .findByUserOrderByCreatedAtDesc(user);
+
+            model.addAttribute("userPosts", userPosts);
+        } else {
+            model.addAttribute("userPosts", List.of());
+        }
+
+        model.addAttribute(
+                "communityPosts",
+                communityPosts
+        );
+
+        model.addAttribute(
+                "keyword",
+                keyword
+        );
+
+        model.addAttribute(
+                "authorFilter",
+                authorFilter
+        );
+
+        model.addAttribute(
+                "sort",
+                sort
+        );
+
         return "community_page";
     }
-
 
     @GetMapping("/policy")
     public String policy() {
@@ -115,8 +230,7 @@ public class HomeController {
     public String resources() {
         return "resources";
     }
-        
-    
+
     @PostMapping("/register")
     public String processRegister(
             @RequestParam String username,
@@ -125,15 +239,16 @@ public class HomeController {
             @RequestParam String confirmPassword,
             @RequestParam(required = false) String guidelines,
             @RequestParam(required = false) String privacy,
-            Model model) {
+            Model model
+    ) {
 
         System.out.println("New registration attempt:");
         System.out.println("Username: " + username);
         System.out.println("Email: " + email);
         System.out.println("Password: " + password);
         System.out.println("confirm Password: " + confirmPassword);
+
         // These keep the user's progress if there is an error.
-        
         model.addAttribute("username", username);
         model.addAttribute("email", email);
         model.addAttribute("password", password);
@@ -141,87 +256,135 @@ public class HomeController {
 
         // Check if username is blank
         if (username == null || username.isBlank()) {
-            model.addAttribute("error", "Username is left blank");
+            model.addAttribute(
+                    "error",
+                    "Username is left blank"
+            );
             return "registration";
         }
 
         // Check username length
-        // allowed 4 -20 
+        // allowed 4 -20
         if (username.length() < 4 || username.length() > 20) {
-            model.addAttribute("error", "Username must be between 4-20 characters.");
+            model.addAttribute(
+                    "error",
+                    "Username must be between 4-20 characters."
+            );
             return "registration";
         }
 
-
         // Check if username already exists in database
         if (userRepository.existsByUsername(username)) {
-        model.addAttribute("error", "That username is already taken.");
-        return "registration";
+            model.addAttribute(
+                    "error",
+                    "That username is already taken."
+            );
+            return "registration";
         }
 
         // Check if email is blank
         if (email == null || email.isBlank()) {
-            model.addAttribute("error", "Email is left blank");
+            model.addAttribute(
+                    "error",
+                    "Email is left blank"
+            );
             return "registration";
         }
 
         // Check if email format is valid
-        if (!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")) {
-            model.addAttribute("error", "Please enter a valid email address.");
+        if (!email.matches(
+                "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"
+        )) {
+            model.addAttribute(
+                    "error",
+                    "Please enter a valid email address."
+            );
             return "registration";
         }
 
         // Check if email already exists in database
         if (userRepository.existsByEmail(email)) {
-        model.addAttribute("error", "That email is already registered.");
-        return "registration";
+            model.addAttribute(
+                    "error",
+                    "That email is already registered."
+            );
+            return "registration";
         }
 
         // Check if password is blank
         if (password == null || password.isBlank()) {
-            model.addAttribute("error", "Password is left blank");
+            model.addAttribute(
+                    "error",
+                    "Password is left blank"
+            );
             return "registration";
         }
 
         // Check password length
         if (password.length() < 8) {
-            model.addAttribute("error", "Password must be at least 8 characters.");
+            model.addAttribute(
+                    "error",
+                    "Password must be at least 8 characters."
+            );
             return "registration";
         }
 
-        //  only allow normal letters, numbers, and common special characters
-        if (!password.matches("^[A-Za-z0-9!@#$%^&*()_+=?.,-]+$")) {
-        model.addAttribute("error", "Password contains invalid characters.");
-        return "registration";
+        // only allow normal letters, numbers, and common special characters
+        if (!password.matches(
+                "^[A-Za-z0-9!@#$%^&*()_+=?.,-]+$"
+        )) {
+            model.addAttribute(
+                    "error",
+                    "Password contains invalid characters."
+            );
+            return "registration";
         }
 
         // Check if password has spaces
         if (password.matches(".*\\s.*")) {
-            model.addAttribute("error", "Password cannot contain spaces.");
-        return "registration";
+            model.addAttribute(
+                    "error",
+                    "Password cannot contain spaces."
+            );
+            return "registration";
         }
 
         // Check if confirm password is blank
-        if (confirmPassword == null || confirmPassword.isBlank()) {
-            model.addAttribute("error", "Confirm password is left blank");
+        if (
+                confirmPassword == null
+                        || confirmPassword.isBlank()
+        ) {
+            model.addAttribute(
+                    "error",
+                    "Confirm password is left blank"
+            );
             return "registration";
         }
 
         // Check if passwords match
         if (!password.equals(confirmPassword)) {
-            model.addAttribute("error", "Passwords do not match.");
+            model.addAttribute(
+                    "error",
+                    "Passwords do not match."
+            );
             return "registration";
         }
 
         // Check guidelines checkbox
         if (guidelines == null) {
-            model.addAttribute("error", "You must accept the guidelines.");
+            model.addAttribute(
+                    "error",
+                    "You must accept the guidelines."
+            );
             return "registration";
         }
 
         // Check privacy checkbox
         if (privacy == null) {
-            model.addAttribute("error", "You must accept the privacy policy.");
+            model.addAttribute(
+                    "error",
+                    "You must accept the privacy policy."
+            );
             return "registration";
         }
 
@@ -231,20 +394,18 @@ public class HomeController {
         user.setEmail(email);
 
         // Encrypt password before saving
-        user.setPassword(passwordEncoder.encode(password));
+        user.setPassword(
+                passwordEncoder.encode(password)
+        );
 
         // Save user to the database
         userRepository.save(user);
 
         // If the code reaches here, everything passed.
-        System.out.println("Registration successful for: " + username);
+        System.out.println(
+                "Registration successful for: " + username
+        );
 
         return "redirect:/login";
-
     }
-
-   
 }
-
- 
-
