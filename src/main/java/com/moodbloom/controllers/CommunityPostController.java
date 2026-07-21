@@ -41,7 +41,13 @@ public class CommunityPostController {
     ) {
         User user = getAuthenticatedUser(authentication);
 
-        CommunityPost communityPost = new CommunityPost(title.trim(),content.trim(),user, anonymous);
+        CommunityPost communityPost =
+                new CommunityPost(
+                        title.trim(),
+                        content.trim(),
+                        user,
+                        anonymous
+                );
 
         communityPostRepository.save(communityPost);
 
@@ -76,7 +82,9 @@ public class CommunityPostController {
                         user
                 );
 
-        communityCommentRepository.save(communityComment);
+        communityCommentRepository.save(
+                communityComment
+        );
 
         return "redirect:/community";
     }
@@ -92,8 +100,6 @@ public class CommunityPostController {
         }
 
         String username = authentication.getName();
-
-        // System.out.println("AUTHENTICATED NAME: " + username);
 
         return userRepository.findByUsername(username)
                 .orElseThrow(() ->

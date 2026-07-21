@@ -19,83 +19,259 @@
                             <span class="card-label">Community Feed</span>
                             <h1>Recent Community Posts</h1>
                         </div>
-                        <p class="empty-message" th:if="${#lists.isEmpty(communityPosts)}">No community posts have been created yet. </p>
+
+                        <form
+                            class="community-search-form"
+                            th:action="@{/community}"
+                            method="get"
+                        >
+                            <div class="community-search-row">
+                                <div class="community-search-field">
+                                    <label for="keyword">Search Posts</label>
+
+                                    <input
+                                        type="text"
+                                        id="keyword"
+                                        name="keyword"
+                                        placeholder="Search by title or content..."
+                                        th:value="${keyword}"
+                                    >
+                                </div>
+
+                                <div class="community-filter-field">
+                                    <label for="authorFilter">Post Type</label>
+
+                                    <select
+                                        id="authorFilter"
+                                        name="authorFilter"
+                                    >
+                                        <option
+                                            value="all"
+                                            th:selected="${authorFilter == 'all'}"
+                                        >
+                                            All Posts
+                                        </option>
+
+                                        <option
+                                            value="anonymous"
+                                            th:selected="${authorFilter == 'anonymous'}"
+                                        >
+                                            Anonymous
+                                        </option>
+
+                                        <option
+                                            value="named"
+                                            th:selected="${authorFilter == 'named'}"
+                                        >
+                                            Named Users
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="community-filter-field">
+                                    <label for="sort">Sort</label>
+
+                                    <select
+                                        id="sort"
+                                        name="sort"
+                                    >
+                                        <option
+                                            value="newest"
+                                            th:selected="${sort == 'newest'}"
+                                        >
+                                            Newest
+                                        </option>
+
+                                        <option
+                                            value="oldest"
+                                            th:selected="${sort == 'oldest'}"
+                                        >
+                                            Oldest
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="community-search-actions">
+                                <button type="submit">
+                                    Search
+                                </button>
+
+                                <a th:href="@{/community}">
+                                    Clear
+                                </a>
+                            </div>
+                        </form>
+
+                        <p class="empty-message" th:if="${#lists.isEmpty(communityPosts)}">
+                            No community posts have been created yet.
+                        </p>
 
                         <div class="community-feed-post" th:each="post : ${communityPosts}">
                             <div class="post-header">
-                                <div> 
-                                    <h3 th:text="${post.title}"> Post Title </h3>
-                                    <strong th:text="${post.displayName}"> Username </strong>
+                                <div>
+                                    <h3 th:text="${post.title}">Post Title</h3>
+                                    <strong th:text="${post.displayName}">Username</strong>
                                 </div>
 
-                                <small th:text="${#temporals.format(post.createdAt,'MMMM dd, yyyy HH:mm')}">Post Date</small>
+                                <small th:text="${#temporals.format(post.createdAt,'MMMM dd, yyyy HH:mm')}">
+                                    Post Date
+                                </small>
                             </div>
 
-                            <p class="post-content" th:text="${post.content}"> Post Content</p>
+                            <p class="post-content" th:text="${post.content}">
+                                Post Content
+                            </p>
 
                             <div class="reaction-section">
-                                <form th:action="@{/community/posts/{postId}/reactions(postId=${post.id})}"method="post">
+                                <form
+                                    th:action="@{/community/posts/{postId}/reactions(postId=${post.id})}"
+                                    method="post"
+                                >
+                                    <button
+                                        type="submit"
+                                        name="reactionType"
+                                        value="LIKE"
+                                        class="reaction-button"
+                                    >
+                                        Like
+                                        <span th:text="${post.likeCount}">0</span>
+                                    </button>
 
-                                <button type="submit" name="reactionType" value="LIKE" class="reaction-button"> Like <span th:text="${post.likeCount}">0</span> </button>
-
-                                <button type="submit" name="reactionType" value="SUPPORT" class="reaction-button"> ❤️ Support <span th:text="${post.supportCount}">0</span> </button>
-
+                                    <button
+                                        type="submit"
+                                        name="reactionType"
+                                        value="SUPPORT"
+                                        class="reaction-button"
+                                    >
+                                        ❤️ Support
+                                        <span th:text="${post.supportCount}">0</span>
+                                    </button>
                                 </form>
                             </div>
 
-                        <div class="comments-section">
-                            <h4>Comments</h4>
+                            <div class="comments-section">
+                                <h4>Comments</h4>
 
-                        <p class="empty-message" th:if="${#lists.isEmpty(post.comments)}">No comments yet.</p>
+                                <p
+                                    class="empty-message"
+                                    th:if="${#lists.isEmpty(post.comments)}"
+                                >
+                                    No comments yet.
+                                </p>
 
-                        <div class="comment-item"th:each="comment : ${post.comments}">
-                        <div class="comment-header">
-                            <strong th:text="${comment.displayName}"> Username </strong>
+                                <div
+                                    class="comment-item"
+                                    th:each="comment : ${post.comments}"
+                                >
+                                    <div class="comment-header">
+                                        <strong th:text="${comment.displayName}">
+                                            Username
+                                        </strong>
 
-                            <small th:text="${#temporals.format(comment.createdAt,'MMMM dd, yyyy HH:mm')}">Comment Date</small>
-                        </div>
+                                        <small th:text="${#temporals.format(comment.createdAt,'MMMM dd, yyyy HH:mm')}">
+                                            Comment Date
+                                        </small>
+                                    </div>
 
-                        <p th:text="${comment.content}">Comment Content</p>
-                    </div>
+                                    <p th:text="${comment.content}">
+                                        Comment Content
+                                    </p>
+                                </div>
 
-                    <form class="comment-form" th:action="@{/community/posts/{postId}/comments(postId=${post.id})}"method="post">
-                        <label th:for="'community-comment-' + ${post.id}">Add a comment </label>
+                                <form
+                                    class="comment-form"
+                                    th:action="@{/community/posts/{postId}/comments(postId=${post.id})}"
+                                    method="post"
+                                >
+                                    <label th:for="'community-comment-' + ${post.id}">
+                                        Add a comment
+                                    </label>
 
-                        <textarea th:id="'community-comment-' + ${post.id}"name="content" placeholder="Write your comment..." maxlength="1000"required></textarea>
+                                    <textarea
+                                        th:id="'community-comment-' + ${post.id}"
+                                        name="content"
+                                        placeholder="Write your comment..."
+                                        maxlength="1000"
+                                        required
+                                    ></textarea>
 
-                        <label class="anonymous-option">
-                            <input type="checkbox" name="anonymous" value="true">Comment anonymously
-                        </label>
+                                    <label class="anonymous-option">
+                                        <input
+                                            type="checkbox"
+                                            name="anonymous"
+                                            value="true"
+                                        >
+                                        Comment anonymously
+                                    </label>
 
-                        <button type="submit"> Post Comment </button>
-                        </form>
-                        </div>
+                                    <button type="submit">
+                                        Post Comment
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </article>
+
                     <!-- Bottom left Box-->
                     <article class="community-card ask-card">
                         <div class="card-header">
                             <span class="card-label">Ask a Question</span>
                             <h2>Post your question</h2>
                         </div>
-                        <form class="ask-form" th:action="@{/community/posts}" method="post">
+
+                        <form
+                            class="ask-form"
+                            th:action="@{/community/posts}"
+                            method="post"
+                        >
                             <label for="post-title">Title</label>
-                            <input type="text" id="post-title" name="title" placeholder="Enter a title" required >
+
+                            <input
+                                type="text"
+                                id="post-title"
+                                name="title"
+                                placeholder="Enter a title"
+                                required
+                            >
+
                             <label for="question-input">Your question</label>
-                            <textarea id="question-input" name="content" placeholder="Type your question here..." required></textarea>
-                            <button type="submit">Post Question</button>
-                            <label class="anonymous-option"><input type="checkbox" name="anonymous" value="true">Post anonymously</label>
+
+                            <textarea
+                                id="question-input"
+                                name="content"
+                                placeholder="Type your question here..."
+                                required
+                            ></textarea>
+
+                            <button type="submit">
+                                Post Question
+                            </button>
+
+                            <label class="anonymous-option">
+                                <input
+                                    type="checkbox"
+                                    name="anonymous"
+                                    value="true"
+                                >
+                                Post anonymously
+                            </label>
                         </form>
-                    </article>                  
+                    </article>
                 </section>
+
                 <!-- Top Right box -->
                 <aside class="community-side">
                     <div class="community-side__box">
                         <h2>Welcome to MoodBloom</h2>
-                        <p>Share what’s on your mind, ask for help, and discover answers from other members of the community.</p>
+
+                        <p>
+                            Share what’s on your mind, ask for help, and discover
+                            answers from other members of the community.
+                        </p>
                     </div>
 
-                    <!-- Community Posts Section Buttom right box --> 
+                    <!-- Community Posts Section Bottom right box -->
                     <div class="community-card posts-card">
                         <div class="card-header">
                             <span class="card-label">Your Posts</span>
@@ -103,26 +279,42 @@
                         </div>
 
                         <div class="posts-list">
-                            <div th:each="post : ${userPosts}" class="post-item">
-                                <h3 th:text="${post.title}">Post Title</h3>
+                            <div
+                                th:each="post : ${userPosts}"
+                                class="post-item"
+                            >
+                                <h3 th:text="${post.title}">
+                                    Post Title
+                                </h3>
 
-                                <p th:text="${post.content}">Post Content</p>
+                                <p th:text="${post.content}">
+                                    Post Content
+                                </p>
 
-                                <small th:text="${#temporals.format(post.createdAt, 'MMMM dd, yyyy HH:mm')}">Post Date</small>
+                                <small th:text="${#temporals.format(post.createdAt, 'MMMM dd, yyyy HH:mm')}">
+                                    Post Date
+                                </small>
 
                                 <div class="comments-section">
-
                                     <div th:if="${#lists.isEmpty(post.comments)}">
                                         <small>No comments yet.</small>
                                     </div>
 
-                                    <div th:each="comment : ${post.comments}" class="comment-item">
-                                        <strong th:text="${comment.displayName}">Username</strong>
+                                    <div
+                                        th:each="comment : ${post.comments}"
+                                        class="comment-item"
+                                    >
+                                        <strong th:text="${comment.displayName}">
+                                            Username
+                                        </strong>
 
-                                        <p th:text="${comment.content}">Comment Content</p>
+                                        <p th:text="${comment.content}">
+                                            Comment Content
+                                        </p>
 
-                                        <small th:text="${#temporals.format(comment.createdAt, 'MMMM dd, yyyy HH:mm')}">Comment Date</small>
-                    
+                                        <small th:text="${#temporals.format(comment.createdAt, 'MMMM dd, yyyy HH:mm')}">
+                                            Comment Date
+                                        </small>
                                     </div>
                                 </div>
                             </div>
@@ -133,11 +325,8 @@
         </main>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-        <footer>
-        
-        </footer>
-        
-    </body>
 
-    
+        <footer>
+        </footer>
+    </body>
 </html>
