@@ -3,6 +3,26 @@ MoodBloom is a full-stack mental wellness web application designed to give users
 
 This application was developed as a team capstone project for the Computer Science program at Franklin University. I served as the Team Lead for the MoodBloom capstone project.
 
+## Screenshots
+
+### Mood Tracker
+![Mood Tracker](src/main/resources/screenshots/MoodTracker.png)
+
+### Daily Wellness Tip
+![Daily Wellness Tip](src/main/resources/screenshots/PopUp.png)
+
+### Journal
+![MoodBloom Journal](src/main/resources/screenshots/MoodJournal.png)
+
+### Community
+![MoodBloom Community](src/main/resources/screenshots/Community.png)
+
+### Profile
+![MoodBloom Profile](src/main/resources/screenshots/Profile.png)
+
+### Mental Health Resources
+![Mental Health Resources](src/main/resources/screenshots/Resources.png)
+
 ## Features
 - User registration, login, and logout
 - Secure authentication with Spring Security
